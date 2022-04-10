@@ -31,10 +31,12 @@ usb.setRTS(False)
 civ = civ[:-1]
 civ = civ.split(",")
 
+data = []
+
 for value in civ:
-    value = '0x' + value
-    data = int(bytes(value, encoding = 'utf-8'), 16)
-    usb.write(struct.pack('>B', data))
+    data.append(int(value, 16))
+
+print(data)
 
 response = ''
 data = usb.read(size=16) #Set size to something high
