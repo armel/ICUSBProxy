@@ -1,4 +1,4 @@
-var SerialPort = require("serialport");
+var SerialPort = require('serialport').SerialPort;
 
 var buffer = new Buffer(7);
 buffer[0] = 0xFE;
