@@ -29,7 +29,8 @@ civ = ["0xfe", "0xfe", "0xa4", "0xe0", "0x15", "0x02", "0xfd"]     # Smeter
 
 civ = "fe,fe,A4,e0,00,56,34,12,07,00,fd,"
 
-civ = civ[:-1].split(',')
+civ = civ[:-1]
+civ = civ.split(',')
 
 print(civ)
 
