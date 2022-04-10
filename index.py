@@ -34,7 +34,7 @@ print('-----')
 byteData = usb.read(size=16) #Set size to something high
 print(len(byteData))
 for value in byteData:
-    print((value.encode("hex"), 16)),
+    print(value.encode("hex"),
 
 usb.close()
 
