@@ -31,9 +31,8 @@ for value in civ:
     usb.write(struct.pack('>B', data))
 usb.close()
 
-buffer = []
-while buffer[-1] != until:
-    buffer += usb.read(1);
+byteData = usb.read(size=800) #Set size to something high
+
 
 # End properly
 
