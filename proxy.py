@@ -7,11 +7,10 @@ Licensed under the MIT license. See LICENSE file in the project root for full li
 '''
 
 import settings as s
-import cgi, cgitb
+import cgi
 import serial
 import sys
-
-cgitb.enable()
+import time
 
 try:
     arg = cgi.FieldStorage()
@@ -36,6 +35,8 @@ for value in civ:
     command.append(int(value, 16))
 
 usb.write(serial.to_bytes(command))
+
+time.sleep(10)
 
 # Receive response
 
