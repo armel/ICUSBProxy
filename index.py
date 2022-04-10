@@ -40,6 +40,7 @@ for value in civ:
     usb.write(struct.pack('>B', data))
 
 
+response = ""
 data = usb.read(size=16) #Set size to something high
 print(len(data))
 for value in data:
