@@ -46,7 +46,7 @@ response = ''
 
 data = usb.read(size=16) #Set size to something high
 for value in data:
-    response += repr(value).encode('hex')
+    response += value.hex()
 
 print(response)
 
