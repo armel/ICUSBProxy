@@ -6,6 +6,8 @@ Usage::
 """
 from http.server import BaseHTTPRequestHandler, HTTPServer
 import logging
+import cgi
+import serial
 
 class S(BaseHTTPRequestHandler):
     def _set_response(self):
@@ -18,14 +20,40 @@ class S(BaseHTTPRequestHandler):
         self._set_response()
         #self.wfile.write("GET request for {}".format(self.path).encode('utf-8'))
 
-    def do_POST(self):
-        content_length = int(self.headers['Content-Length']) # <--- Gets the size of data
-        post_data = self.rfile.read(content_length) # <--- Gets the data itself
-        logging.info("POST request,\nPath: %s\nHeaders:\n%s\n\nBody:\n%s\n",
-                str(self.path), str(self.headers), post_data.decode('utf-8'))
+        try:
+            arg = cgi.FieldStorage()
+            civ = arg['civ'].value
+        except:
+            civ = ','
 
-        self._set_response()
-        self.wfile.write("POST request for {}".format(self.path).encode('utf-8'))
+        usb = serial.Serial(s.client_serial, s.client_baudrate, timeout=0.1)
+        usb.setDTR(False)
+        usb.setRTS(False)
+
+        #civ = 'fe,fe,a4,e0,00,56,34,12,07,00,fd,'  # Debug trace
+        #civ = 'fe,fe,a4,e0,03,fd,'                 # Debug trace
+
+        # Send command
+
+        civ = civ[:-1]
+        civ = civ.split(',')
+        command = []
+
+        for value in civ:
+            command.append(int(value, 16))
+
+        usb.write(serial.to_bytes(command))
+
+        # Receive response
+
+        response = ''
+
+        data = usb.read(size=16) # Set size to something high
+        for value in data:
+            response += '{:02x}'.format(value)
+
+        # End properly
+        self.wfile.write(response)
 
 def run(server_class=HTTPServer, handler_class=S, port=8080):
     logging.basicConfig(level=logging.INFO)
