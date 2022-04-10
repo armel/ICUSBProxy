@@ -37,7 +37,7 @@ for value in civ:
     print(value)
     data.append(int(value, 16))
 
-print(data)
+usb.write(serial.to_bytes(data))
 
 response = ''
 data = usb.read(size=16) #Set size to something high
