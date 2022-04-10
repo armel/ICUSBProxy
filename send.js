@@ -1,3 +1,5 @@
+var SerialPort = require("serialport");
+
 var buffer = new Buffer(7);
 buffer[0] = 0xFE;
 buffer[1] = 0xFE;
