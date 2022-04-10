@@ -34,10 +34,18 @@ civ = civ.split(',')
 
 print(civ)
 
+'''
 for value in civ:
     print(value)
     data = int(bytes(value).encode("utf-8"), 16)
     usb.write(struct.pack('>B', data))
+'''
+
+for value in civ:
+    value = '0x' + value
+    data = int(bytes(value).encode("utf-8"), 16)
+    usb.write(struct.pack('>B', data))
+
 
 print('-----')
 byteData = usb.read(size=16) #Set size to something high
