@@ -11,6 +11,7 @@ import cgi
 import time
 import serial
 import struct
+import sys
 from time import sleep
 
 form = cgi.FieldStorage()
