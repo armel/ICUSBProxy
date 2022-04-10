@@ -25,7 +25,7 @@ class S(BaseHTTPRequestHandler):
         civ = civ[1]
 
         print(civ)
-        
+
         usb = serial.Serial(s.client_serial, s.client_baudrate, timeout=0.1)
         usb.setDTR(False)
         usb.setRTS(False)
@@ -53,7 +53,7 @@ class S(BaseHTTPRequestHandler):
             response += '{:02x}'.format(value)
 
         # End properly
-        self.wfile.write(response)
+        print(response)
 
 def run(server_class=HTTPServer, handler_class=S, port=8080):
     logging.basicConfig(level=logging.INFO)
