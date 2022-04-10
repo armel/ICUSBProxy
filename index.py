@@ -33,7 +33,7 @@ for value in civ:
 print('-----')
 byteData = usb.read(size=10) #Set size to something high
 print(len(byteData))
-print b.byteData.hex()
+print(byteData.hex())
 
 usb.close()
 
