@@ -31,7 +31,7 @@ for value in civ:
     usb.write(struct.pack('>B', data))
 
 print('-----')
-byteData = usb.read(size=10) #Set size to something high
+byteData = usb.read(size=16) #Set size to something high
 print(len(byteData))
 print(byteData.hex())
 
