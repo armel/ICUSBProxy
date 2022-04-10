@@ -32,7 +32,7 @@ civ = 'fe,fe,a4,e0,03,fd,'                 # Debug trace
 # Send command
 
 civ = civ[:-1]
-civ = civ.split(",")
+civ = civ.split(',')
 command = []
 
 for value in civ:
