@@ -33,7 +33,7 @@ civ = civ.split(",")
 
 for value in civ:
     value = '0x' + value
-    data = int(bytes(value).encode('utf-8'), 16)
+    data = int(bytes(value, encoding('utf-8'), 16)
     usb.write(struct.pack('>B', data))
 
 response = ''
