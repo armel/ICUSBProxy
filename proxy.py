@@ -35,7 +35,7 @@ data = []
 
 for value in civ:
     print(value)
-    data.append(int(value, 16))
+    #data.append(int(value, 16))
 
 print(data)
 
