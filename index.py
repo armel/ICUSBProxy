@@ -27,6 +27,11 @@ usb.setRTS(False)
 civ = ["0xfe", "0xfe", "0xa4", "0xe0", "0x15", "0x02", "0xfd"]     # Smeter
 #civ = ["0xfe", "0xfe", "0xa4", "0xe0", "0x04", "0xfd"]             # Mode
 
+civ = "fe,fe,A4,e0,00,56,34,12,07,00,fd,"
+
+print(civ)
+print(civ[:-1])
+
 for value in civ:
     print(value)
     data = int(bytes(value).encode("utf-8"), 16)
