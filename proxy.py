@@ -27,8 +27,7 @@ usb.setDTR(False)
 usb.setRTS(False)
 
 #civ = 'fe,fe,a4,e0,00,56,34,12,07,00,fd,'  # Debug trace
-civ = 'fe,fe,a4,e0,03,fd,'
-
+civ = 'fe,fe,a4,e0,03,fd,'                  # Debug trace
 
 # Send command
 
@@ -48,7 +47,8 @@ response = ''
 
 data = usb.read(size=16) #Set size to something high
 for value in data:
-    print(value)
+    print(format(value, 'x'))
+
 
 print(response)
 
