@@ -31,11 +31,12 @@ for value in civ:
     usb.write(struct.pack('>B', data))
 usb.close()
 
-while True:
-    bytesToRead = usb.inWaiting()
-    usb.read(bytesToRead)
-    print(bytesToRead)
-    
+buffer = []
+while buffer[-1] != until:
+    if usb.inWaiting() < 1:
+        return buffer
+    buffer += usb.read(1);
+
 # End properly
 
 exit()
