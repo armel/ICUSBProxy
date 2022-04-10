@@ -49,7 +49,7 @@ data = usb.read(size=16) # Set size to something high
 for value in data:
     response += '{:02x}'.format(value)
 
-print(response)
+#print(response)
 sys.stdout.flush()
 
 usb.close()
