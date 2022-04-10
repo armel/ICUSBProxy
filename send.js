@@ -14,7 +14,7 @@ var port = "/dev/ttyUSB2";
 
 var com = new SerialPort({
     path: port,
-    baudRate: 9600,
+    baudRate: 115200,
     databits: 8,
     parity: 'none'
 }, false);
