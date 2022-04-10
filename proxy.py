@@ -26,7 +26,9 @@ usb = serial.Serial(s.client_serial, s.client_baudrate, timeout=0.01)
 usb.setDTR(False)
 usb.setRTS(False)
 
-#civ = 'fe,fe,A4,e0,00,56,34,12,07,00,fd,'  # Debug trace
+#civ = 'fe,fe,a4,e0,00,56,34,12,07,00,fd,'  # Debug trace
+civ = 'fe,fe,a4,e0,03,fd,'
+
 
 # Send command
 
