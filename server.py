@@ -4,6 +4,7 @@ Very simple HTTP server in python for logging requests
 Usage::
     ./server.py [<port>]
 """
+import settings as s
 from http.server import BaseHTTPRequestHandler, HTTPServer
 import logging
 import cgi
