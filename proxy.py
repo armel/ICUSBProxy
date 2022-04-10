@@ -12,6 +12,8 @@ import serial
 import sys
 import time
 
+sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
+
 try:
     arg = cgi.FieldStorage()
     civ = arg['civ'].value
