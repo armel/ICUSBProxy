@@ -20,7 +20,7 @@ var com = new SerialPort({
     path: port,
     baudRate: 9600,
     databits: 8,
-    parity: 'yes'
+    parity: 'no'
 }, false);
 
 com.open(function (error) {
