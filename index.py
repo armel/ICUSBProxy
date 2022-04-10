@@ -33,8 +33,6 @@ usb.close()
 
 buffer = []
 while buffer[-1] != until:
-    if usb.inWaiting() < 1:
-        return buffer
     buffer += usb.read(1);
 
 # End properly
