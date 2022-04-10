@@ -30,9 +30,10 @@ civ = "fe,fe,a4,e0,15,02,fd,"
 
 civ = civ.split(',')
 for value in civ:
+    value = "0x" + value
     print(value)
-    #data = int(bytes(value).encode("utf-8"), 16)
-    #usb.write(bytes(value).encode("utf-8"))
+    data = int(bytes(value).encode("utf-8"), 16)
+    usb.write(struct.pack('>B', data))
 
 print('-----')
 byteData = usb.read(size=16) #Set size to something high
