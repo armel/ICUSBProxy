@@ -36,8 +36,6 @@ for value in civ:
 
 usb.write(serial.to_bytes(command))
 
-time.sleep(10)
-
 # Receive response
 
 response = ''
