@@ -21,7 +21,7 @@ except:
     civ = ','
 '''
 
-usb = serial.Serial(s.client_serial, s.client_baudrate, timeout=0.5)
+usb = serial.Serial(s.client_serial, s.client_baudrate, timeout=0.1)
 usb.setDTR(False)
 usb.setRTS(False)
 
@@ -49,8 +49,5 @@ for value in data:
 
 # End properly
 
-try:
-    print("Content-Type: text/plain\n\n")  # here text -- not html
-    print(response)
-except:
-    cgi.print_exception()                 # catch and print errors
+print("Content-Type: text/plain\n\n")  # here text -- not html
+print(response)
