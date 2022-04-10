@@ -50,7 +50,7 @@ for value in data:
 
 print(response)
 
-#usb.close()
+usb.close()
 # End properly
 
 exit()
