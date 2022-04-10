@@ -8,6 +8,7 @@ Licensed under the MIT license. See LICENSE file in the project root for full li
 
 import settings as s
 import http.server
+import socketserver
  
 handler = http.server.SimpleHTTPRequestHandler
 
