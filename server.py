@@ -21,6 +21,9 @@ class S(BaseHTTPRequestHandler):
         self._set_response()
         #self.wfile.write("GET request for {}".format(self.path).encode('utf-8'))
 
+        tmp = str(self.path).split('=')
+        self.wfile.write(tmp[1])
+
         try:
             arg = cgi.FieldStorage()
             civ = arg['civ'].value
