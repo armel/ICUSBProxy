@@ -22,7 +22,7 @@ try:
 except:
     civ = ','
 
-usb = serial.Serial(s.client_serial, s.client_baudrate, timeout=0.01)
+usb = serial.Serial(s.client_serial, s.client_baudrate, timeout=0.1)
 usb.setDTR(False)
 usb.setRTS(False)
 
@@ -35,7 +35,6 @@ civ = civ[:-1]
 civ = civ.split(",")
 command = []
 
-
 for value in civ:
     command.append(int(value, 16))
 
@@ -45,7 +44,7 @@ usb.write(serial.to_bytes(command))
 
 response = ''
 
-data = usb.read(size=16) #Set size to something high
+data = usb.read(size=16) # Set size to something high
 for value in data:
     response += '{:02x}'.format(value)
 
