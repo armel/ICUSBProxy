@@ -9,7 +9,7 @@ Licensed under the MIT license. See LICENSE file in the project root for full li
 import settings as s
 import http.server
  
-server_address = ('localhost', s.server_port)
+server_address = ('192.168.1.32', s.server_port)
 
 server = http.server.HTTPServer
 handler = http.server.CGIHTTPRequestHandler
