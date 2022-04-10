@@ -31,7 +31,7 @@ for value in civ:
     usb.write(struct.pack('>B', data))
 usb.close()
 
-While True:
+while True:
     bytesToRead = usb.inWaiting()
     usb.read(bytesToRead)
     print(bytesToRead)
