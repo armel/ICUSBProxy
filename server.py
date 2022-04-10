@@ -21,7 +21,7 @@ class S(BaseHTTPRequestHandler):
         #self._set_response()
         #self.wfile.write("GET request for {}".format(self.path).encode('utf-8'))
 
-civ = str(self.path).split('=')
+        civ = str(self.path).split('=')
         civ = civ[1]
 
         usb = serial.Serial(s.client_serial, s.client_baudrate, timeout=0.1)
