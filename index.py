@@ -32,7 +32,7 @@ civ = civ.split(',')
 for value in civ:
     print(value)
     #data = int(bytes(value).encode("utf-8"), 16)
-    usb.write(bytes(value).encode("utf-8"))
+    #usb.write(bytes(value).encode("utf-8"))
 
 print('-----')
 byteData = usb.read(size=16) #Set size to something high
