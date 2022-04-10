@@ -32,6 +32,9 @@ for value in civ:
 
 print('-----')
 byteData = usb.read(size=10) #Set size to something high
+for value in byteData:
+    print(int(bytes(value).encode("utf-8"), 16)
+        
 usb.close()
 
 print(byteData)
