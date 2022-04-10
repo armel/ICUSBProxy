@@ -11,9 +11,9 @@ import cgi
 import time
 import serial
 
+'''
 print('Content-type: text/html; charset=utf-8\n')
 
-'''
 try:
     arg = cgi.FieldStorage()
     civ = arg['civ'].value
