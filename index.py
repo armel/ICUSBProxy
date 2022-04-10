@@ -22,7 +22,7 @@ usb = serial.Serial(serialport, baudrate, timeout=0.5)
 usb.setDTR(False)
 usb.setRTS(False)
 
-#civ = "fe,fe,A4,e0,00,56,34,12,07,00,fd,"
+civ = "fe,fe,A4,e0,00,56,34,12,07,00,fd,"
 
 civ = civ[:-1]
 civ = civ.split(',')
