@@ -49,7 +49,7 @@ for value in data:
 
 # End properly
 
-print('Content-type: text/html; charset=utf-8\n')
+#print('Content-type: text/html; charset=utf-8\n')
 print(response)
 
 #usb.close()
