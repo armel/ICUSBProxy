@@ -1,4 +1,4 @@
-var SerialPort = require("serialport");
+var SerialPort = require('serialport').SerialPort;
 var port = "/dev/ttyUSB2";
 var commande = "FEFEA4E01515FD";
 
