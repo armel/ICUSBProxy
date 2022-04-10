@@ -49,5 +49,8 @@ for value in data:
 
 # End properly
 
-print("Content-Type: text/plain\n\n")  # here text -- not html
-print(response)
+try:
+    print("Content-Type: text/plain\n\n")  # here text -- not html
+    print(response)
+except:
+    cgi.print_exception()                 # catch and print errors
