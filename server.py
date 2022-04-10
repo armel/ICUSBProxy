@@ -21,15 +21,9 @@ class S(BaseHTTPRequestHandler):
         self._set_response()
         #self.wfile.write("GET request for {}".format(self.path).encode('utf-8'))
 
-        tmp = str(self.path).split('=')
-        print(tmp)
+        civ = str(self.path).split('=')
+        civ = civ[1]
         
-        try:
-            arg = cgi.FieldStorage()
-            civ = arg['civ'].value
-        except:
-            civ = ','
-
         usb = serial.Serial(s.client_serial, s.client_baudrate, timeout=0.1)
         usb.setDTR(False)
         usb.setRTS(False)
