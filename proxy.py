@@ -48,8 +48,6 @@ for value in data:
     response += '{:02x}'.format(value)
 
 # End properly
-
-print('Content-type: text/html; charset=utf-8\n')
 print(response)
 
 #usb.close()
