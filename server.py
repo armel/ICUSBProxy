@@ -24,8 +24,6 @@ class S(BaseHTTPRequestHandler):
         civ = str(self.path).split('=')
         civ = civ[1]
 
-        print(civ)
-
         usb = serial.Serial(s.client_serial, s.client_baudrate, timeout=0.1)
         usb.setDTR(False)
         usb.setRTS(False)
