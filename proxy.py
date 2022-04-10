@@ -48,6 +48,6 @@ for value in data:
     response += '{:02x}'.format(value)
 
 # End properly
-print(response)
 
-#usb.close()
+print("Content-Type: text/plain\n\n")  # here text -- not html
+print(response)
