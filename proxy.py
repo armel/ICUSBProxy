@@ -26,28 +26,31 @@ usb = serial.Serial(s.client_serial, s.client_baudrate, timeout=0.01)
 usb.setDTR(False)
 usb.setRTS(False)
 
-civ = 'fe,fe,A4,e0,00,56,34,12,07,00,fd,'  # Debug trace
+#civ = 'fe,fe,A4,e0,00,56,34,12,07,00,fd,'  # Debug trace
+
+# Send command
 
 civ = civ[:-1]
 civ = civ.split(",")
+command = []
 
-data = []
 
 for value in civ:
-    print(value)
-    data.append(int(value, 16))
+    command.append(int(value, 16))
 
-usb.write(serial.to_bytes(data))
+usb.write(serial.to_bytes(command))
+
+# Receive response
 
 response = ''
+
 data = usb.read(size=16) #Set size to something high
 for value in data:
     response += value.encode('hex')
 
 print(response)
 
-usb.close()
-
+#usb.close()
 # End properly
 
 exit()
