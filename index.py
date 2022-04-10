@@ -26,7 +26,7 @@ civ = ["0xfe","0xfe","0xA4","0xe0","0x00","0x56","0x34","0x12","0x07","0x00","0x
 
 for value in civ:
     print(value)
-    data = int(bytes(value, 'UTF-8'), 16)
+    data = int(bytes(value).encode("utf-8"), 16)
     usb.write(struct.pack('>B', data))
 usb.close()
     
