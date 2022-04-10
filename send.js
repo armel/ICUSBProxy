@@ -1,5 +1,5 @@
 var SerialPort = require("serialport");
-var port = "/dev/USB2";
+var port = "/dev/ttyUSB2";
 var commande = "FEFEA4E01515FD";
 
 var serialPort = new SerialPort(port, {
