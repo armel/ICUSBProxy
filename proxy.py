@@ -47,9 +47,10 @@ data = usb.read(size=16) # Set size to something high
 for value in data:
     response += '{:02x}'.format(value)
 
-#print(response)
-
-usb.close()
 # End properly
 
+print('Content-type: text/html; charset=utf-8\n')
+print(response)
+
+usb.close()
 exit()
