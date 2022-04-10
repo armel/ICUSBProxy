@@ -10,9 +10,6 @@ import settings as s
 import cgi 
 import time
 import serial
-import struct
-import sys
-from time import sleep
 
 form = cgi.FieldStorage()
 print('Content-type: text/html; charset=utf-8\n')
@@ -49,8 +46,7 @@ data = usb.read(size=16) # Set size to something high
 for value in data:
     response += '{:02x}'.format(value)
 
-#print(response)
-sys.stdout.flush()
+print(response)
 
 usb.close()
 # End properly
