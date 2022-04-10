@@ -11,8 +11,6 @@ import cgi
 import time
 import serial
 
-'''
-form = cgi.FieldStorage()
 print('Content-type: text/html; charset=utf-8\n')
 
 try:
@@ -20,7 +18,6 @@ try:
     civ = arg['civ'].value
 except:
     civ = ','
-'''
 
 usb = serial.Serial(s.client_serial, s.client_baudrate, timeout=0.2)
 usb.setDTR(False)
@@ -30,7 +27,7 @@ usb.setRTS(False)
 civ = 'fe,fe,a4,e0,03,fd,'                 # Debug trace
 
 # Send command
-'''
+
 civ = civ[:-1]
 civ = civ.split(',')
 command = []
@@ -49,7 +46,6 @@ for value in data:
     response += '{:02x}'.format(value)
 
 print(response)
-'''
 
 usb.close()
 # End properly
