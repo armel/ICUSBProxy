@@ -49,6 +49,7 @@ for value in data:
     response += '{:02x}'.format(value)
 
 print(response)
+sys.stdout.flush()
 
 usb.close()
 # End properly
