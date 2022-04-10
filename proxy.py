@@ -8,8 +8,8 @@ Licensed under the MIT license. See LICENSE file in the project root for full li
 
 import settings as s
 import cgi 
-import time
 import serial
+import sys
 
 '''
 print('Content-type: text/html; charset=utf-8\n')
@@ -49,7 +49,9 @@ for value in data:
 
 # End properly
 
-#print('Content-type: text/html; charset=utf-8\n')
+sys.stdout.reconfigure(encoding='utf-8')
+
+print('Content-type: text/html; charset=utf-8\n')
 print(response)
 
 #usb.close()
