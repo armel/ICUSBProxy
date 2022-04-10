@@ -12,7 +12,8 @@ buffer[6] = 0xFD;
 var port = "/dev/ttyUSB2";
 
 
-var com = new SerialPort(port, {
+var com = new SerialPort({
+    path: port,
     baudRate: 9600,
     databits: 8,
     parity: 'none'
