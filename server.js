@@ -6,7 +6,7 @@ var io = require('socket.io')(http);
 var SerialPort = require('serialport').SerialPort;
 var serial = new SerialPort({
     path: "/dev/ttyUSB2",
-    baudrate: 19200
+    baudRate: 9600,
 });
 
 var civCommandTmp = "";
