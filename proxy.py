@@ -38,7 +38,6 @@ usb.write(serial.to_bytes(command))
 
 response = ''
 
-'''
 data = usb.read(size=16) # Set size to something high
 for value in data:
     response += '{:02x}'.format(value)
@@ -46,12 +45,4 @@ for value in data:
 # End properly
 
 print("Content-Type: text/plain\n\n")  # here text -- not html
-print(response)
-'''
-
-response = ""
-data = usb.read(size=16) #Set size to something high
-for value in data:
-    response += value.encode("hex")
-
 print(response)
