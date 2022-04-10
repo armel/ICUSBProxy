@@ -22,17 +22,10 @@ usb = serial.Serial(serialport, baudrate, timeout=0.5)
 usb.setDTR(False)
 usb.setRTS(False)
 
-#civ = ["0xfe","0xfe","0xA4","0xe0","0x00","0x56","0x34","0x12","0x07","0x00","0xfd"]
-#civ = ["0xfe", "0xfe", "0xa4", "0xe0", "0x15", "0x15", "0xfd"]     # Vd
-civ = ["0xfe", "0xfe", "0xa4", "0xe0", "0x15", "0x02", "0xfd"]     # Smeter
-#civ = ["0xfe", "0xfe", "0xa4", "0xe0", "0x04", "0xfd"]             # Mode
-
-civ = "fe,fe,A4,e0,00,56,34,12,07,00,fd,"
+#civ = "fe,fe,A4,e0,00,56,34,12,07,00,fd,"
 
 civ = civ[:-1]
 civ = civ.split(',')
-
-print(civ)
 
 '''
 for value in civ:
@@ -47,11 +40,12 @@ for value in civ:
     usb.write(struct.pack('>B', data))
 
 
-print('-----')
-byteData = usb.read(size=16) #Set size to something high
-print(len(byteData))
-for value in byteData:
-    print(value.encode("hex")),
+data = usb.read(size=16) #Set size to something high
+print(len(data))
+for value in data:
+    response += value.encode("hex")
+
+print(response)
 
 usb.close()
 
