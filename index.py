@@ -16,7 +16,7 @@ try:
 except:
     pass
 
-baudrate = 9600
+baudrate = 19200
 serialport = "/dev/ttyUSB2"
 usb = serial.Serial(serialport, baudrate, timeout=0.5)
 usb.setDTR(False)
