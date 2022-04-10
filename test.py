@@ -18,11 +18,11 @@ print('Content-Type: application/html\n\n')
 try:
     arg = cgi.FieldStorage()
     get_command = arg['command'].value
+    print(get_command)
 
 except:
     pass
 
-print(get_command)
 # End properly
 
 exit()
