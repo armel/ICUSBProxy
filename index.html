@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>SerialPort Test</title>
+    <style>
+        h2 {
+            width: 550px;
+            border: solid 1px #ff0000;
+            display: inline;
+        }
+
+        article, aside, dialog, figure, footer, header,
+        hgroup, menu, nav, section {
+            display: block;
+        }
+    </style>
+    <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+    <script src="jquery.knob.js"></script>
+    <script>
+        $(function () {
+            $(".knob").knob();
+        });
+    </script>
+</head>
+<body>
+    <h1>freq</h1>
+    <h2 width="100">mode</h2>
+
+
+    <br />
+    <input type="text" value="0" class="knob" data-displayinput="false" data-fgcolor="#222222"
+           data-width="150" data-cursor=true data-max="20">
+    <br />
+    <button id="downBtn">▼</button><button id="modeBtn">MODE</button><button id="upBtn">▲</button>
+
+    <h3>hexdump</h3>
+    <input type="text" id="hexInput" value="fefe58e0050000000700fd" />
+    <button id="sendBtn">Send Hex</button>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="index.js"></script>
+
+    <br />
+</body>
+</html>
