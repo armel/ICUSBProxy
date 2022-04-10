@@ -52,4 +52,4 @@ for value in data:
 print('Content-type: text/html; charset=utf-8\n')
 print(response)
 
-usb.close()
+#usb.close()
