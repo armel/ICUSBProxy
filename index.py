@@ -32,7 +32,7 @@ for value in civ:
 usb.close()
 
 while True:
-    #bytesToRead = usb.inWaiting()
+    bytesToRead = usb.inWaiting()
     usb.read(bytesToRead)
     print(bytesToRead)
     
