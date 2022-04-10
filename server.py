@@ -8,10 +8,14 @@ Licensed under the MIT license. See LICENSE file in the project root for full li
 
 import settings as s
 import http.server
-import socketserver
  
-handler = http.server.SimpleHTTPRequestHandler
+server_address = ('', s.server_port)
 
-with socketserver.TCPServer(('/', s.server_port), handler) as httpd:
-    print('serving at port', s.server_port)
-    httpd.serve_forever()
+server = http.server.HTTPServer
+handler = http.server.CGIHTTPRequestHandler
+handler.cgi_directories = ['/']
+
+print('Serveur actif sur le port :', s.server_port)
+
+httpd = server(server_address, handler)
+httpd.serve_forever()
