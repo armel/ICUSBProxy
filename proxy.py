@@ -27,7 +27,7 @@ usb.setDTR(False)
 usb.setRTS(False)
 
 #civ = 'fe,fe,a4,e0,00,56,34,12,07,00,fd,'  # Debug trace
-#civ = 'fe,fe,a4,e0,03,fd,'                 # Debug trace
+civ = 'fe,fe,a4,e0,03,fd,'                 # Debug trace
 
 # Send command
 
