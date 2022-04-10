@@ -18,7 +18,7 @@ except:
 
 baudrate = 115200
 serialport = "/dev/ttyUSB2"
-usb = serial.Serial(serialport, baudrate, timeout=0.5)
+usb = serial.Serial(serialport, baudrate, timeout=0.1)
 usb.setDTR(False)
 usb.setRTS(False)
 
