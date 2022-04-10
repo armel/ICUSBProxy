@@ -7,9 +7,11 @@ Licensed under the MIT license. See LICENSE file in the project root for full li
 '''
 
 import settings as s
-import cgi 
+import cgi, cgitb
 import serial
 import sys
+
+cgitb.enable()
 
 try:
     arg = cgi.FieldStorage()
