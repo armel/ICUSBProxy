@@ -47,8 +47,6 @@ data = usb.read(size=16) # Set size to something high
 for value in data:
     response += '{:02x}'.format(value)
 
-response = response.encode(encoding = 'UTF-8' ,errors = 'strict')
-
 # End properly
 
 print('Content-type: text/html; charset=utf-8\n')
