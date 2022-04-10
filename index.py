@@ -30,7 +30,7 @@ for value in civ:
     data = int(bytes(value).encode("utf-8"), 16)
     usb.write(struct.pack('>B', data))
 
-byteData = usb.read(size=800) #Set size to something high
+byteData = usb.read(size=10) #Set size to something high
 usb.close()
 
 # End properly
