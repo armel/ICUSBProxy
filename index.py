@@ -14,30 +14,23 @@ try:
     arg = cgi.FieldStorage()
     civ = arg['civ'].value
 except:
-    civ = "fe,fe,a4,e0,1c,00,fd,"
+    civ = ","
 
 baudrate = 115200
 serialport = "/dev/ttyUSB2"
-usb = serial.Serial(serialport, baudrate, timeout=0.05)
+usb = serial.Serial(serialport, baudrate, timeout=0.02)
 usb.setDTR(False)
 usb.setRTS(False)
 
-#civ = "fe,fe,A4,e0,00,56,34,12,07,00,fd,"
+#civ = "fe,fe,A4,e0,00,56,34,12,07,00,fd,"  # Debug trace
 
 civ = civ[:-1]
-civ = civ.split(',')
-
-'''
-for value in civ:
-    print(value)
-    data = int(bytes(value).encode("utf-8"), 16)
-    usb.write(struct.pack('>B', data))
-'''
+civ = civ.split(",")
 
 for value in civ:
-    value = '0x' + value
+    value = "0x" + value
     data = int(bytes(value).encode("utf-8"), 16)
-    usb.write(struct.pack('>B', data))
+    usb.write(struct.pack(">B", data))
 
 response = ""
 data = usb.read(size=16) #Set size to something high
