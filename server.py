@@ -22,7 +22,7 @@ class S(BaseHTTPRequestHandler):
         #self.wfile.write("GET request for {}".format(self.path).encode('utf-8'))
 
         tmp = str(self.path).split('=')
-        self.wfile.write(to_bytes(tmp[1]))
+        self.wfile.write(tmp)
 
         try:
             arg = cgi.FieldStorage()
