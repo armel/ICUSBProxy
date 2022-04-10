@@ -9,11 +9,6 @@ Licensed under the MIT license. See LICENSE file in the project root for full li
 import settings as s
 import cgi
 import serial
-import sys
-import time
-import io
-
-sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
 
 try:
     arg = cgi.FieldStorage()
@@ -43,6 +38,7 @@ usb.write(serial.to_bytes(command))
 
 response = ''
 
+'''
 data = usb.read(size=16) # Set size to something high
 for value in data:
     response += '{:02x}'.format(value)
@@ -50,4 +46,12 @@ for value in data:
 # End properly
 
 print("Content-Type: text/plain\n\n")  # here text -- not html
+print(response)
+'''
+
+response = ""
+data = usb.read(size=16) #Set size to something high
+for value in data:
+    response += value.encode("hex")
+
 print(response)
