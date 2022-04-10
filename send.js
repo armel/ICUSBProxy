@@ -1,13 +1,17 @@
 var SerialPort = require('serialport').SerialPort;
 
-var buffer = new Buffer(7);
+var buffer = new Buffer(11);
 buffer[0] = 0xFE;
 buffer[1] = 0xFE;
 buffer[2] = 0xA4;
 buffer[3] = 0xE0;
-buffer[4] = 0x15;
-buffer[5] = 0x15;
-buffer[6] = 0xFD;
+buffer[4] = 0x00;
+buffer[5] = 0x56;
+buffer[6] = 0x34;
+buffer[7] = 0x12;
+buffer[8] = 0x07;
+buffer[9] = 0x00;
+buffer[10] = 0xFD;
 
 var port = "/dev/ttyUSB2";
 
