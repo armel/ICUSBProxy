@@ -21,7 +21,7 @@ except:
     civ = ','
 '''
 
-usb = serial.Serial(s.client_serial, s.client_baudrate, timeout=0.2)
+usb = serial.Serial(s.client_serial, s.client_baudrate, timeout=0.1)
 usb.setDTR(False)
 usb.setRTS(False)
 
