@@ -24,7 +24,7 @@ try:
     civ = ["0xfe","0xfe","0xA4","0xe0","0x00","0x56","0x34","0x12","0x07","0x00","0xfd"]
 
     for value in civ:
-        usb.write(struct.pack('>B', int(bytes(value), 'UTF-8'), 16)))
+        usb.write(struct.pack('>B', int(bytes(value), 'UTF-8'), 16))
     usb.close()
 
 except:
