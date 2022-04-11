@@ -53,7 +53,7 @@ class S(BaseHTTPRequestHandler):
         # End properly
         self.send_response(200)
         self.send_header('Content-type', 'text/html')
-        self.send(response)
+        self.wfile.write(response)
         self.end_headers()
 
 
