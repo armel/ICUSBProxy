@@ -56,16 +56,15 @@ class S(BaseHTTPRequestHandler):
         return
 
 def run(server_class=HTTPServer, handler_class=S, port=1234):
-    logging.basicConfig(level=logging.INFO)
     server_address = ('', port)
     httpd = server_class(server_address, handler_class)
-    logging.info('Starting httpd...\n')
+    print('Starting httpd on port :', port)
     try:
         httpd.serve_forever()
     except KeyboardInterrupt:
         pass
     httpd.server_close()
-    logging.info('Stopping httpd...\n')
+    print('Stopping httpd...\n')
 
 if __name__ == '__main__':
     from sys import argv
