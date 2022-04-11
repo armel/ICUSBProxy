@@ -16,6 +16,9 @@ class S(BaseHTTPRequestHandler):
         self.send_header('Content-type', 'text/html')
         self.end_headers()
 
+    def do_GET(self):
+        self._set_response()
+
         civ = str(self.path).split('=')
         civ = civ[1]
 
