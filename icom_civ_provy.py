@@ -12,7 +12,7 @@ import serial
 
 client_serial = '/dev/ttyUSB2'
 client_baudrate = 115900
-debug = False
+debug = True
 
 class S(BaseHTTPRequestHandler):
     def _set_response(self):
