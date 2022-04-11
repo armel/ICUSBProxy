@@ -18,9 +18,12 @@ class S(BaseHTTPRequestHandler):
         self.send_header('Content-type', 'text/html')
         self.end_headers()
 
-    def do_GET(self):
-        self._set_response()
+    def _set_error(self):
+        self.send_response(404)
+        self.send_header('Content-type', 'text/html')
+        self.end_headers()
 
+    def do_GET(self):
         civ = str(self.path).split('=')
         civ = civ[1]
 
@@ -49,8 +52,11 @@ class S(BaseHTTPRequestHandler):
             response += '{:02x}'.format(value)
 
         # End properly
-        self.send_response(200)
-        self.wfile.write("{}".format(response).encode('utf-8'))
+        try:
+            self._set_response()
+            self.wfile.write("{}".format(response).encode('utf-8'))
+        except:
+            self._set_error()
 
     def log_message(self, format, *args):
         return
