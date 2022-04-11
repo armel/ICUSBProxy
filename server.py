@@ -51,9 +51,9 @@ class S(BaseHTTPRequestHandler):
 
         # End properly
         self.send_response(200)
-        self.send_header('Content-type', 'text/html')
-        self.wfile.write(" {}".format(response).encode('utf-8'))
-        self.end_headers()
+        #self.send_header('Content-type', 'text/html')
+        self.wfile.write("{}".format(response).encode('utf-8'))
+        #self.end_headers()
 
 
 def run(server_class=HTTPServer, handler_class=S, port=8080):
