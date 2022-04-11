@@ -17,7 +17,6 @@ class S(BaseHTTPRequestHandler):
         self.end_headers()
 
     def do_GET(self):
-        #logging.info("GET request,\nPath: %s\nHeaders:\n%s\n", str(self.path), str(self.headers))
         self._set_response()
 
         civ = str(self.path).split('=')
@@ -31,7 +30,6 @@ class S(BaseHTTPRequestHandler):
         #civ = 'fe,fe,a4,e0,03,fd,'                 # Debug trace
 
         # Send command
-
         civ = civ[:-1]
         civ = civ.split(',')
         command = []
@@ -42,7 +40,6 @@ class S(BaseHTTPRequestHandler):
         usb.write(serial.to_bytes(command))
 
         # Receive response
-
         response = ''
 
         data = usb.read(size=16) # Set size to something high
@@ -51,10 +48,7 @@ class S(BaseHTTPRequestHandler):
 
         # End properly
         self.send_response(200)
-        #self.send_header('Content-type', 'text/html')
         self.wfile.write("{}".format(response).encode('utf-8'))
-        #self.end_headers()
-
 
 def run(server_class=HTTPServer, handler_class=S, port=8080):
     logging.basicConfig(level=logging.INFO)
