@@ -10,8 +10,6 @@ import logging
 import cgi
 import serial
 
-client_serial = '/dev/ttyUSB2'
-client_baudrate = 115900
 debug = False
 
 class S(BaseHTTPRequestHandler):
@@ -32,16 +30,19 @@ class S(BaseHTTPRequestHandler):
         civ = str(self.path).split('=')
         civ = civ[1]
 
+        #civ = 'fe,fe,a4,e0,00,56,34,12,07,00,fd,/dev/ttyUSB2,115900'  # Debug trace
+        #civ = 'fe,fe,a4,e0,03,fd,/dev/ttyUSB2,115900'                 # Debug trace
+
+        civ = civ.split(',')
+
+        client_serial = civ.pop()
+        client_baudrate = civ.pop()
+
         usb = serial.Serial(client_serial, client_baudrate, timeout=0.02)
         usb.setDTR(False)
         usb.setRTS(False)
 
-        #civ = 'fe,fe,a4,e0,00,56,34,12,07,00,fd,'  # Debug trace
-        #civ = 'fe,fe,a4,e0,03,fd,'                 # Debug trace
-
         # Send command
-        civ = civ[:-1]
-        civ = civ.split(',')
         command = []
 
         for value in civ:
