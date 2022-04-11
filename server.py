@@ -19,7 +19,6 @@ class S(BaseHTTPRequestHandler):
     def do_GET(self):
         #logging.info("GET request,\nPath: %s\nHeaders:\n%s\n", str(self.path), str(self.headers))
         self._set_response()
-        #self.wfile.write("GET request for {}".format(self.path).encode('utf-8'))
 
         civ = str(self.path).split('=')
         civ = civ[1]
@@ -53,7 +52,7 @@ class S(BaseHTTPRequestHandler):
         # End properly
         self.send_response(200)
         self.send_header('Content-type', 'text/html')
-        self.wfile.write("GET request for {}".format(response).encode('utf-8'))
+        self.wfile.write(" {}".format(response).encode('utf-8'))
         self.end_headers()
 
 
