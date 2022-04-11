@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""
-Very simple HTTP server in python for logging requests
-Usage::
-    ./server.py [<port>]
-"""
-import settings as s
+'''
+Copyright (c) F4HWN Armel. All rights reserved.
+Licensed under the MIT license. See LICENSE file in the project root for full license information.
+Usage: ./icom_civ_proxy.py [<port>]
+'''
+
 from http.server import BaseHTTPRequestHandler, HTTPServer
 import logging
 import cgi
@@ -53,7 +53,7 @@ class S(BaseHTTPRequestHandler):
     def log_message(self, format, *args):
         return
 
-def run(server_class=HTTPServer, handler_class=S, port=8080):
+def run(server_class=HTTPServer, handler_class=S, port=1234):
     logging.basicConfig(level=logging.INFO)
     server_address = ('', port)
     httpd = server_class(server_address, handler_class)
