@@ -12,6 +12,7 @@ import serial
 
 client_serial = '/dev/ttyUSB2'
 client_baudrate = 115900
+debug = False
 
 class S(BaseHTTPRequestHandler):
     def _set_response(self):
@@ -25,6 +26,9 @@ class S(BaseHTTPRequestHandler):
         self.end_headers()
 
     def do_GET(self):
+        if debug:        
+            logging.info("GET request,\nPath: %s\nHeaders:\n%s\n", str(self.path), str(self.headers))
+
         civ = str(self.path).split('=')
         civ = civ[1]
 
@@ -63,7 +67,8 @@ class S(BaseHTTPRequestHandler):
         return
 
 def run(server_class=HTTPServer, handler_class=S, port=1234):
-    logging.basicConfig(level=logging.INFO)
+    if debug:
+        logging.basicConfig(level=logging.INFO)
     server_address = ('', port)
     httpd = server_class(server_address, handler_class)
     print('Starting httpd on port :', port)
