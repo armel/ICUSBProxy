@@ -10,6 +10,9 @@ import logging
 import cgi
 import serial
 
+client_serial = '/dev/ttyUSB2'
+client_baudrate = 115900
+
 class S(BaseHTTPRequestHandler):
     def _set_response(self):
         self.send_response(200)
@@ -22,7 +25,7 @@ class S(BaseHTTPRequestHandler):
         civ = str(self.path).split('=')
         civ = civ[1]
 
-        usb = serial.Serial(s.client_serial, s.client_baudrate, timeout=0.02)
+        usb = serial.Serial(client_serial, client_baudrate, timeout=0.02)
         usb.setDTR(False)
         usb.setRTS(False)
 
