@@ -6,6 +6,7 @@ Usage: ./icom_civ_proxy.py [<port>]
 '''
 
 from http.server import BaseHTTPRequestHandler, HTTPServer
+import logging
 import cgi
 import serial
 
@@ -62,6 +63,7 @@ class S(BaseHTTPRequestHandler):
         return
 
 def run(server_class=HTTPServer, handler_class=S, port=1234):
+    logging.basicConfig(level=logging.INFO)
     server_address = ('', port)
     httpd = server_class(server_address, handler_class)
     print('Starting httpd on port :', port)
