@@ -6,7 +6,6 @@ Usage: ./icom_civ_proxy.py [<port>]
 '''
 
 from http.server import BaseHTTPRequestHandler, HTTPServer
-import logging
 import cgi
 import serial
 
