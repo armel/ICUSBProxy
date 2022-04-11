@@ -14,6 +14,7 @@ class S(BaseHTTPRequestHandler):
     def _set_response(self):
         self.send_response(200)
         self.send_header('Content-type', 'text/html')
+        self.end_headers()
 
     def do_GET(self):
         self._set_response()
@@ -48,7 +49,6 @@ class S(BaseHTTPRequestHandler):
         # End properly
         self.send_response(200)
         self.wfile.write("{}".format(response).encode('utf-8'))
-        self.end_headers()
 
 def run(server_class=HTTPServer, handler_class=S, port=8080):
     logging.basicConfig(level=logging.INFO)
