@@ -53,7 +53,7 @@ class S(BaseHTTPRequestHandler):
         # End properly
         self.send_response(200)
         self.send_header('Content-type', 'text/html')
-        self.wfile(response)
+        self.wfile.write("GET request for {}".format(response).encode('utf-8'))
         self.end_headers()
 
 
