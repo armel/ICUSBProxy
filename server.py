@@ -22,7 +22,7 @@ class S(BaseHTTPRequestHandler):
         civ = str(self.path).split('=')
         civ = civ[1]
 
-        usb = serial.Serial(s.client_serial, s.client_baudrate, timeout=0.1)
+        usb = serial.Serial(s.client_serial, s.client_baudrate, timeout=0.01)
         usb.setDTR(False)
         usb.setRTS(False)
 
