@@ -39,7 +39,7 @@ class S(BaseHTTPRequestHandler):
         client_baudrate = civ.pop()
 
         usb = serial.Serial(client_serial, client_baudrate, timeout=0.02)
-        if usb.isOpen():
+        if usb.inWaiting():
             usb.setDTR(False)
             usb.setRTS(False)
 
