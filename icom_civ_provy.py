@@ -23,11 +23,6 @@ class S(BaseHTTPRequestHandler):
         self.send_header('Content-type', 'text/html')
         self.end_headers()
 
-    def _set_connect(self):
-        self.send_response(504)
-        self.send_header('Content-type', 'text/html')
-        self.end_headers()
-
     def do_GET(self):
         if debug:        
             logging.info("GET request,\nPath: %s\nHeaders:\n%s\n", str(self.path), str(self.headers))
@@ -55,18 +50,14 @@ class S(BaseHTTPRequestHandler):
                 command.append(int(value, 16))
 
             usb.write(serial.to_bytes(command))
-        except:
-            self._set_connect()
 
-        # Receive response
-        response = ''
+            # Receive response
+            response = ''
 
-        data = usb.read(size=16) # Set size to something high
-        for value in data:
-            response += '{:02x}'.format(value)
+            data = usb.read(size=16) # Set size to something high
+            for value in data:
+                response += '{:02x}'.format(value)
 
-        # End properly
-        try:
             self._set_response()
             self.wfile.write("{}".format(response).encode('utf-8'))
         except:
