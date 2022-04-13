@@ -64,7 +64,7 @@ class S(BaseHTTPRequestHandler):
                 self.wfile.write("{}".format(response).encode('utf-8'))
             except:
                 self._set_error()
-        elsif(response == ''):
+        elif(response == ''):
             try:
                 self._set_response()
             except:
