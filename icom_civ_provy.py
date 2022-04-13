@@ -23,6 +23,11 @@ class S(BaseHTTPRequestHandler):
         self.send_header('Content-type', 'text/html')
         self.end_headers()
 
+    def _set_connect(self):
+        self.send_response(504)
+        self.send_header('Content-type', 'text/html')
+        self.end_headers()
+
     def do_GET(self):
         if debug:        
             logging.info("GET request,\nPath: %s\nHeaders:\n%s\n", str(self.path), str(self.headers))
@@ -38,17 +43,20 @@ class S(BaseHTTPRequestHandler):
         client_serial = civ.pop()
         client_baudrate = civ.pop()
 
-        usb = serial.Serial(client_serial, client_baudrate, timeout=0.02)
-        usb.setDTR(False)
-        usb.setRTS(False)
+        try:
+            usb = serial.Serial(client_serial, client_baudrate, timeout=0.02)
+            usb.setDTR(False)
+            usb.setRTS(False)
 
-        # Send command
-        command = []
+            # Send command
+            command = []
 
-        for value in civ:
-            command.append(int(value, 16))
+            for value in civ:
+                command.append(int(value, 16))
 
-        usb.write(serial.to_bytes(command))
+            usb.write(serial.to_bytes(command))
+        except:
+            self._set_connect()
 
         # Receive response
         response = ''
