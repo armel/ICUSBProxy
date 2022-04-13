@@ -38,26 +38,27 @@ class S(BaseHTTPRequestHandler):
         client_serial = civ.pop()
         client_baudrate = civ.pop()
 
+        usb = serial.Serial(client_serial, client_baudrate, timeout=0.02)
+        usb.setDTR(False)
+        usb.setRTS(False)
+
+        # Send command
+        command = []
+
+        for value in civ:
+            command.append(int(value, 16))
+
+        usb.write(serial.to_bytes(command))
+
+        # Receive response
+        response = ''
+
+        data = usb.read(size=16) # Set size to something high
+        for value in data:
+            response += '{:02x}'.format(value)
+
+        # End properly
         try:
-            usb = serial.Serial(client_serial, client_baudrate, timeout=0.02)
-            usb.setDTR(False)
-            usb.setRTS(False)
-
-            # Send command
-            command = []
-
-            for value in civ:
-                command.append(int(value, 16))
-
-            usb.write(serial.to_bytes(command))
-
-            # Receive response
-            response = ''
-
-            data = usb.read(size=16) # Set size to something high
-            for value in data:
-                response += '{:02x}'.format(value)
-
             self._set_response()
             self.wfile.write("{}".format(response).encode('utf-8'))
         except:
