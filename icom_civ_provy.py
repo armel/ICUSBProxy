@@ -18,13 +18,8 @@ class S(BaseHTTPRequestHandler):
         self.send_header('Content-type', 'text/html')
         self.end_headers()
 
-    def _set_error_data(self):
+    def _set_error(self):
         self.send_response(404)
-        self.send_header('Content-type', 'text/html')
-        self.end_headers()
-
-    def _set_error_device(self):
-        self.send_response(403)
         self.send_header('Content-type', 'text/html')
         self.end_headers()
 
@@ -43,13 +38,9 @@ class S(BaseHTTPRequestHandler):
         client_serial = civ.pop()
         client_baudrate = civ.pop()
 
-        try:
-            usb = serial.Serial(client_serial, client_baudrate, timeout=0.02)
-            usb.setDTR(False)
-            usb.setRTS(False)
-        except:
-            self._set_error_device()
-            return
+        usb = serial.Serial(client_serial, client_baudrate, timeout=0.02)
+        usb.setDTR(False)
+        usb.setRTS(False)
 
         # Send command
         command = []
@@ -71,7 +62,7 @@ class S(BaseHTTPRequestHandler):
             self._set_response()
             self.wfile.write("{}".format(response).encode('utf-8'))
         except:
-            self._set_error_data()
+            self._set_error()
 
     def log_message(self, format, *args):
         return
