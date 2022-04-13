@@ -39,26 +39,23 @@ class S(BaseHTTPRequestHandler):
         client_baudrate = civ.pop()
 
         usb = serial.Serial(client_serial, client_baudrate, timeout=0.02)
-        if usb.inWaiting():
-            usb.setDTR(False)
-            usb.setRTS(False)
+        usb.setDTR(False)
+        usb.setRTS(False)
 
-            # Send command
-            command = []
+        # Send command
+        command = []
 
-            for value in civ:
-                command.append(int(value, 16))
+        for value in civ:
+            command.append(int(value, 16))
 
-            usb.write(serial.to_bytes(command))
+        usb.write(serial.to_bytes(command))
 
-            # Receive response
-            response = ''
+        # Receive response
+        response = ''
 
-            data = usb.read(size=16) # Set size to something high
-            for value in data:
-                response += '{:02x}'.format(value)
-        else:
-            response = ''
+        data = usb.read(size=16) # Set size to something high
+        for value in data:
+            response += '{:02x}'.format(value)
 
         # End properly
         try:
