@@ -58,10 +58,10 @@ class S(BaseHTTPRequestHandler):
             response += '{:02x}'.format(value)
 
         # End properly
-        try:
+        if(response != ''):
             self._set_response()
             self.wfile.write("{}".format(response).encode('utf-8'))
-        except:
+        else:
             self._set_error()
 
     def log_message(self, format, *args):
