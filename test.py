@@ -14,8 +14,8 @@ client_serial = civ.pop()
 client_baudrate = civ.pop()
 
 usb = serial.Serial(client_serial, client_baudrate, timeout=0.02)
-usb.setDTR(False)
-usb.setRTS(False)
+#usb.setDTR(False)
+#usb.setRTS(False)
 
 # Send command
 command = []
