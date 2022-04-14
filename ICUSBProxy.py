@@ -2,7 +2,7 @@
 '''
 Copyright (c) F4HWN Armel. All rights reserved.
 Licensed under the MIT license. See LICENSE file in the project root for full license information.
-Usage: ./icom_civ_proxy.py [<port>]
+Usage: ./ICUSBProxy.py [<port>]
 '''
 
 from http.server import BaseHTTPRequestHandler, HTTPServer
@@ -77,13 +77,13 @@ def run(server_class=HTTPServer, handler_class=S, port=1234):
         logging.basicConfig(level=logging.INFO)
     server_address = ('', port)
     httpd = server_class(server_address, handler_class)
-    print('Starting httpd on port :', port)
+    print('Starting HTTPD on Port :', port)
     try:
         httpd.serve_forever()
     except KeyboardInterrupt:
         pass
     httpd.server_close()
-    print('Stopping httpd...\n')
+    print('Stopping HTTPD...\n')
 
 if __name__ == '__main__':
     from sys import argv
