@@ -10,7 +10,7 @@ import logging
 import cgi
 import serial
 
-debug = True
+debug = False
 
 class S(BaseHTTPRequestHandler):
     def _set_response(self):
