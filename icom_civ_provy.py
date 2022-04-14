@@ -39,7 +39,7 @@ class S(BaseHTTPRequestHandler):
         client_baudrate = civ.pop()
 
         usb = serial.Serial(client_serial, client_baudrate, timeout=0.02)
-        print(usb.setDTR(False))
+        usb.setDTR(False)
         usb.setRTS(False)
 
         # Send command

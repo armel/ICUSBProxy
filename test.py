@@ -17,7 +17,7 @@ print(client_serial)
 print(client_baudrate)
 
 usb = serial.Serial("/dev/ttyUSB0", 115900, timeout=0.02)
-#usb.setDTR(False)
+print(usb.setDTR(False))
 #usb.setRTS(False)
 
 # Send command
