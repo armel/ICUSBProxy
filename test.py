@@ -13,6 +13,9 @@ civ = civ.split(',')
 client_serial = civ.pop()
 client_baudrate = civ.pop()
 
+print(client_serial)
+print(client_baudrate)
+
 usb = serial.Serial(client_serial, client_baudrate, timeout=0.02)
 #usb.setDTR(False)
 #usb.setRTS(False)
