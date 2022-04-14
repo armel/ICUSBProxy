@@ -55,10 +55,10 @@ class S(BaseHTTPRequestHandler):
         response = ''
 
         data = usb.read(size=16) # Set size to something high
-        print("===", data)
         for value in data:
             response += '{:02x}'.format(value)
 
+        # Check if bad response    
         if(response == "fefee0" + client_adresse + "fafd"):
             response = ''
 
@@ -66,7 +66,6 @@ class S(BaseHTTPRequestHandler):
         try:
             self._set_response()
             self.wfile.write("{}".format(response).encode('utf-8'))
-            print(">>>", response)
         except:
             self._set_error()
 
