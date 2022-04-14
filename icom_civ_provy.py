@@ -16,15 +16,11 @@ class S(BaseHTTPRequestHandler):
     def _set_response(self):
         self.send_response(200)
         self.send_header('Content-type', 'text/html')
-        self.send_header('Cache-Control', 'no-store, must-revalidate')
-        self.send_header('Expires', '0')
         self.end_headers()
 
     def _set_error(self):
         self.send_response(404)
         self.send_header('Content-type', 'text/html')
-        self.send_header('Cache-Control', 'no-store, must-revalidate')
-        self.send_header('Expires', '0')
         self.end_headers()
 
     def do_GET(self):
@@ -41,6 +37,7 @@ class S(BaseHTTPRequestHandler):
 
         client_serial = civ.pop()
         client_baudrate = civ.pop()
+        client_adresse = civ[2]
 
         usb = serial.Serial(client_serial, client_baudrate, timeout=0.02)
         usb.setDTR(False)
@@ -61,6 +58,9 @@ class S(BaseHTTPRequestHandler):
         print("===", data)
         for value in data:
             response += '{:02x}'.format(value)
+
+        if(response == "fefee0" + client_adresse + "fafd"):
+            response = ''
 
         # End properly
         try:
