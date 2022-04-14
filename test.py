@@ -16,7 +16,7 @@ client_baudrate = civ.pop()
 print(client_serial)
 print(client_baudrate)
 
-usb = serial.Serial(client_serial, client_baudrate, timeout=0.02)
+usb = serial.Serial(client_serial, int(client_baudrate), timeout=0.02)
 #usb.setDTR(False)
 #usb.setRTS(False)
 
