@@ -10,7 +10,7 @@ import logging
 import cgi
 import serial
 
-debug = False
+debug = True
 
 class S(BaseHTTPRequestHandler):
     def _set_response(self):
@@ -64,8 +64,8 @@ class S(BaseHTTPRequestHandler):
         # End properly
         try:
             self._set_response()
-            if(response != ''):
-                self.wfile.write("{}".format(response).encode('utf-8'))
+            self.wfile.write("{}".format(response).encode('utf-8'))
+            print(">>>", response)
         except:
             self._set_error()
 
