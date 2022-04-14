@@ -60,7 +60,8 @@ class S(BaseHTTPRequestHandler):
         # End properly
         try:
             self._set_response()
-            self.wfile.write("{}".format(response).encode('utf-8'))
+            if(response != ''):
+                self.wfile.write("{}".format(response).encode('utf-8'))
         except:
             self._set_error()
 
