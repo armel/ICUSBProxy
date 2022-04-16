@@ -10,6 +10,8 @@ import logging
 import cgi
 import serial
 
+name = "ICUSBProxy"
+version = "0.0.2"
 debug = False
 
 class S(BaseHTTPRequestHandler):
@@ -77,13 +79,13 @@ def run(server_class=HTTPServer, handler_class=S, port=1234):
         logging.basicConfig(level=logging.INFO)
     server_address = ('', port)
     httpd = server_class(server_address, handler_class)
-    print('Starting HTTPD on Port :', port)
+    print('Starting ' + name + ' v' + version + ' HTTPD on Port', port)
     try:
         httpd.serve_forever()
     except KeyboardInterrupt:
         pass
     httpd.server_close()
-    print('Stopping HTTPD...\n')
+    print('Stopping ' + name + ' v' + version + ' HTTPD...\n')
 
 if __name__ == '__main__':
     from sys import argv
