@@ -45,9 +45,15 @@ And if you want to run this process even after logging out from the shell/termin
 
 `nohup ./ICUSBProxy.py 2345 &`
 
+# Credits
+ 
+Many thanks to [mdonkers](https://gist.github.com/mdonkers/63e115cc0c79b4f6b8b3a6b797e485c7).
+
+
 # Donations
+
+Special thanks to Matt B-Wilkinson, Rolf Schroeder, Brian Garber, Robert Agnew and Meinhard Frank Günther for their donations. That’s so kind of them. Thanks so much 🙏🏻
 
 If you find this project fun and useful then [offer me a beer](https://www.paypal.me/F4HWN) :) 
 
-By the way, you can follow me on [Twitter](https://twitter.com/F4HWN). It always makes me happy ;) 
-
+By the way, you can follow me on [Twitter](https://twitter.com/F4HWN) and post pictures of your installation with your M5Stack. It always makes me happy ;) 
