@@ -1,4 +1,9 @@
 # ICUSBProxy
+![licence](https://img.shields.io/github/license/armel/ICUSBProxy)
+![language](https://img.shields.io/github/languages/top/armel/ICUSBProxy)
+![size](https://img.shields.io/github/repo-size/armel/ICUSBProxy)
+![version](https://img.shields.io/github/v/release/armel/ICUSBProxy)
+![activity](https://img.shields.io/github/commit-activity/y/armel/ICUSBProxy)
 
 The Icom IC7300 or IC9700 transceivers do not have Bluetooth or WiFi support.
 
@@ -15,6 +20,16 @@ __M5Stack__ <--- (_WiFi Connection_) ---> __PC with ICUSBProxy__ <--- (_USB Conn
 As a PC, I'm using a simple Raspberry Pi under Raspbian. But it could work with another PC and another operating system. 
 
 You only need Python3.
+
+# Installation
+
+Check that you have Python3 on your PC and if not install it.
+
+Then, still on your PC or Mac, clone the ICUSBProxy project via the command :
+
+`git clone https://github.com/armel/ICUSBProxy.git`
+
+You can also download a [zip archive](https://github.com/armel/ICUSBProxy/releases) of the project, if you prefer, and unzip it.
 
 # Usage
 
