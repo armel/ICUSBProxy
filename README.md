@@ -5,25 +5,38 @@
 ![version](https://img.shields.io/github/v/release/armel/ICUSBProxy)
 ![activity](https://img.shields.io/github/commit-activity/y/armel/ICUSBProxy)
 
-The Icom IC7300 or IC9700 transceivers do not have Bluetooth or WiFi support.
+The Icom IC-7300 or IC-9700 transceivers do not have Bluetooth or WiFi support.
 
-This project allows to set up an HTTP _proxy_ allowing to talk wirelessly, from an M5Stack (or other equipment), with an Icom transceiver like IC7300 or IC9700 and sending CI-V commands.
+This project allows to set up an HTTP _proxy_ allowing to talk wirelessly, from an M5Stack (or other equipment), with an Icom transceiver like IC-7300 or IC-9700 and sending CI-V commands.
 
-> I don't own the 9700, so I haven't tested it.
+> I don't own the IC-9700, so I haven't tested it.
 
 This project was made to work with my ICMultiMeter on M5Stack.
 
 # Technical architecture
 
+ICUSBProxy only need Python3.
+
+## Connexion
+
 __M5Stack__ <--- (_WiFi Connection_) ---> __PC with ICUSBProxy__ <--- (_USB Connection_) ---> __Icom Transceiver__.
 
 As a PC, I'm using a simple Raspberry Pi under Raspbian. But it could work with another PC and another operating system. 
 
-You only need Python3.
+## GET Request data format
+
+`civ = {CI-V bytes field command},{tty},{baud}` 
+
+Examples,
+
+```
+civ = fe,fe,a4,e0,00,56,34,12,07,00,fd,/dev/ttyUSB0,115900
+civ = fe,fe,a4,e0,03,fd,/dev/ttyACM0,115900
+```
 
 # Installation
 
-Check that you have Python3 on your PC and if not install it.
+Check that you have Python3 on your PC. If not, install it.
 
 Then, still on your PC or Mac, clone the ICUSBProxy project via the command :
 
@@ -52,7 +65,8 @@ Many thanks to [mdonkers](https://gist.github.com/mdonkers/63e115cc0c79b4f6b8b3a
 
 # Donations
 
-Special thanks to Matt B-Wilkinson, Rolf Schroeder, Brian Garber, Robert Agnew and Meinhard Frank Günther for their donations. That’s so kind of them. Thanks so much 🙏🏻
+Special thanks to Rolf Schroeder, Brian Garber, Matt B-Wilkinson, Robert Agnew, Meinhard Frank Günther, Johan Hansson
+and Tadeusz Pater for their donations. That’s so kind of them. Thanks so much 🙏🏻
 
 If you find this project fun and useful then [offer me a beer](https://www.paypal.me/F4HWN) :) 
 
