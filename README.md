@@ -25,13 +25,13 @@ As a PC, I'm using a simple Raspberry Pi under Raspbian. But it could work with 
 
 ## GET Request data format
 
-`civ = {CI-V bytes field command},{tty},{baud}` 
+`civ = {CI-V bytes field command},{baud},{tty}` 
 
 Examples,
 
 ```
-civ = fe,fe,a4,e0,00,56,34,12,07,00,fd,/dev/ttyUSB0,115900
-civ = fe,fe,a4,e0,03,fd,/dev/ttyACM0,115900
+civ = fe,fe,a4,e0,00,56,34,12,07,00,fd,115900,/dev/ttyUSB0
+civ = fe,fe,a4,e0,03,fd,115900,/dev/ttyACM0
 ```
 
 # Installation
