@@ -13,7 +13,7 @@ import serial
 name = "ICUSBProxy"
 version = "0.0.3"
 
-debug = False
+verbose = 0 # 0 = nothing, 1 = error, 2 = all (error, request, )
 client_timeout = 0.02
 
 class S(BaseHTTPRequestHandler):
@@ -28,7 +28,7 @@ class S(BaseHTTPRequestHandler):
         self.end_headers()
 
     def do_GET(self):
-        if debug:        
+        if debug > 1:        
             logging.info("GET request,\nPath: %s\nHeaders:\n%s\n", str(self.path), str(self.headers))
 
         civ = str(self.path).split('=')
@@ -67,7 +67,7 @@ class S(BaseHTTPRequestHandler):
             if(response == "fefee0" + client_adresse + "fafd"):
                 response = ''
         except:
-            if debug:
+            if debug > 0:
                 print('Check if serial device ' + client_serial + ' at ' + client_baudrate + ' is up...')
             self._set_error()
 
@@ -82,7 +82,7 @@ class S(BaseHTTPRequestHandler):
         return
 
 def run(server_class=HTTPServer, handler_class=S, port=1234):
-    if debug:
+    if debug > 1:
         logging.basicConfig(level=logging.INFO)
     server_address = ('', port)
     httpd = server_class(server_address, handler_class)
