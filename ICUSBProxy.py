@@ -84,7 +84,7 @@ def run(server_class=HTTPServer, handler_class=S, port=1234, verbose=0):
     if verbose > 1:
         logging.basicConfig(level=logging.INFO)
     server_address = ('', port)
-    httpd = server_class(server_address, handler_class)
+    httpd = server_class(server_address, handler_class, verbose)
     print('Starting ' + name + ' v' + version + ' HTTPD on Port', port)
     try:
         httpd.serve_forever()
