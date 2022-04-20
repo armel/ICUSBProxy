@@ -65,9 +65,12 @@ class S(BaseHTTPRequestHandler):
             # Check if bad response    
             if(response == "fefee0" + client_adresse + "fafd"):
                 response = ''
+
+            if server_verbose > 0:
+                print('Serial device ' + client_serial + ' is up...')
         except:
             if server_verbose > 0:
-                print('Check if serial device ' + client_serial + ' at ' + client_baudrate + ' is up...')
+                print('Serial device ' + client_serial + ' is down...')
             self._set_error()
 
         # End properly
