@@ -67,7 +67,8 @@ class S(BaseHTTPRequestHandler):
             if(response == "fefee0" + client_adresse + "fafd"):
                 response = ''
         except:
-            print('Check if serial device ' + client_serial + ' at ' + client_baudrate + ' is up...')
+            if debug:
+                print('Check if serial device ' + client_serial + ' at ' + client_baudrate + ' is up...')
             self._set_error()
 
         # End properly
