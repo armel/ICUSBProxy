@@ -99,6 +99,6 @@ if __name__ == '__main__':
     if len(argv) == 2:
         run(port=int(argv[1]))
     elif len(argv) == 3:
-        run(verbose=int(argv[1]))
+        run(port=int(argv[1]), verbose=int(argv[2]))
     else:
         run()
