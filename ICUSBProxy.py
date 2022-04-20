@@ -15,7 +15,7 @@ version = "0.0.3"
 
 client_timeout = 0.02
 
-class S(BaseHTTPRequestHandler):
+class S(BaseHTTPRequestHandler, verbose):
     def _set_response(self):
         self.send_response(200)
         self.send_header('Content-type', 'text/html')
