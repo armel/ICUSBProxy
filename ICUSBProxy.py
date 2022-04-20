@@ -12,7 +12,6 @@ import serial
 
 name = "ICUSBProxy"
 version = "0.0.3"
-
 client_timeout = 0.02
 
 class S(BaseHTTPRequestHandler):
@@ -80,7 +79,7 @@ class S(BaseHTTPRequestHandler):
     def log_message(self, format, *args):
         return
 
-def run(server_class=HTTPServer, handler_class=S, port=1234, verbose=0):
+def run(server_class=HTTPServer, handler_class=S, port=1234):
     if verbose > 1:
         logging.basicConfig(level=logging.INFO)
     server_address = ('', port)
@@ -99,6 +98,7 @@ if __name__ == '__main__':
     if len(argv) == 2:
         run(port=int(argv[1]))
     elif len(argv) == 3:
-        run(port=int(argv[1]), verbose=int(argv[2]))
+        verbose = int(argv[2]))
+        run(port=int(argv[1]))
     else:
         run()
