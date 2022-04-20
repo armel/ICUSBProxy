@@ -81,7 +81,6 @@ class S(BaseHTTPRequestHandler):
         return
 
 def run(server_class=HTTPServer, handler_class=S, port=1234):
-    print(server_verbose)
     if server_verbose > 1:
         logging.basicConfig(level=logging.INFO)
     server_address = ('', port)
