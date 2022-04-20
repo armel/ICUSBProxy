@@ -15,7 +15,7 @@ version = "0.0.3"
 
 client_timeout = 0.02
 
-class S(BaseHTTPRequestHandler, verbose):
+class S(BaseHTTPRequestHandler):
     def _set_response(self):
         self.send_response(200)
         self.send_header('Content-type', 'text/html')
@@ -84,7 +84,7 @@ def run(server_class=HTTPServer, handler_class=S, port=1234, verbose=0):
     if verbose > 1:
         logging.basicConfig(level=logging.INFO)
     server_address = ('', port)
-    httpd = server_class(server_address, handler_class, verbose)
+    httpd = server_class(server_address, handler_class)
     print('Starting ' + name + ' v' + version + ' HTTPD on Port', port)
     try:
         httpd.serve_forever()
