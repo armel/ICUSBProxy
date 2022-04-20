@@ -71,6 +71,7 @@ class S(BaseHTTPRequestHandler):
         except:
             if server_verbose > 0:
                 print('Serial device ' + client_serial + ' is down...')
+                usb.flush()
             self._set_error()
 
         # End properly
