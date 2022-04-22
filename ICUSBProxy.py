@@ -11,8 +11,9 @@ import cgi
 import serial
 
 name = "ICUSBProxy"
-version = "0.0.2"
-debug = False
+version = "0.0.3"
+client_timeout = 0.02
+server_verbose = 0
 
 class S(BaseHTTPRequestHandler):
     def _set_response(self):
@@ -26,7 +27,7 @@ class S(BaseHTTPRequestHandler):
         self.end_headers()
 
     def do_GET(self):
-        if debug:        
+        if server_verbose > 1:        
             logging.info("GET request,\nPath: %s\nHeaders:\n%s\n", str(self.path), str(self.headers))
 
         civ = str(self.path).split('=')
@@ -41,28 +42,36 @@ class S(BaseHTTPRequestHandler):
         client_baudrate = civ.pop()
         client_adresse = civ[2]
 
-        usb = serial.Serial(client_serial, client_baudrate, timeout=0.02)
-        usb.setDTR(False)
-        usb.setRTS(False)
+        try:
+            usb = serial.Serial(client_serial, client_baudrate, timeout=client_timeout)
+            usb.setDTR(False)
+            usb.setRTS(False)            
 
-        # Send command
-        command = []
+            # Send command
+            command = []
 
-        for value in civ:
-            command.append(int(value, 16))
+            for value in civ:
+                command.append(int(value, 16))
 
-        usb.write(serial.to_bytes(command))
+            usb.write(serial.to_bytes(command))
 
-        # Receive response
-        response = ''
-
-        data = usb.read(size=16) # Set size to something high
-        for value in data:
-            response += '{:02x}'.format(value)
-
-        # Check if bad response    
-        if(response == "fefee0" + client_adresse + "fafd"):
+            # Receive response
             response = ''
+
+            data = usb.read(size=16) # Set size to something high
+            for value in data:
+                response += '{:02x}'.format(value)
+
+            # Check if bad response    
+            if(response == "fefee0" + client_adresse + "fafd"):
+                response = ''
+
+            if server_verbose > 0:
+                print('Serial device ' + client_serial + ' is up...')
+        except:
+            if server_verbose > 0:
+                print('Serial device ' + client_serial + ' is down...')
+            self._set_error()
 
         # End properly
         try:
@@ -75,7 +84,7 @@ class S(BaseHTTPRequestHandler):
         return
 
 def run(server_class=HTTPServer, handler_class=S, port=1234):
-    if debug:
+    if server_verbose > 1:
         logging.basicConfig(level=logging.INFO)
     server_address = ('', port)
     httpd = server_class(server_address, handler_class)
@@ -91,6 +100,10 @@ if __name__ == '__main__':
     from sys import argv
 
     if len(argv) == 2:
+        server_verbose = 0
+        run(port=int(argv[1]))
+    elif len(argv) == 3:
+        server_verbose = int(argv[2])
         run(port=int(argv[1]))
     else:
         run()
