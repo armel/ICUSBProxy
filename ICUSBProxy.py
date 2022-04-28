@@ -33,6 +33,8 @@ class S(BaseHTTPRequestHandler):
         # Init
         civ = str(self.path).split('=')
 
+        print(civ)
+        
         response = ''
         request = civ[0]
 
