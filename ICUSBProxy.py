@@ -34,7 +34,7 @@ class S(BaseHTTPRequestHandler):
         civ = str(self.path).split('=')
 
         print(civ)
-        
+
         response = ''
         request = civ[0]
 
@@ -79,7 +79,7 @@ class S(BaseHTTPRequestHandler):
                 self._set_error()
         else:
             if server_verbose > 0:
-                print('Bad request ' + civ)
+                print('Bad request ' + request)
                 self._set_error()
 
         # End properly
