@@ -30,10 +30,11 @@ class S(BaseHTTPRequestHandler):
         if server_verbose > 1:        
             logging.info("GET request,\nPath: %s\nHeaders:\n%s\n", str(self.path), str(self.headers))
 
-        # Receive response
-        response = ''
-
+        # Init
         civ = str(self.path).split('=')
+
+        response = ''
+        request = civ[0]
 
         if(len(civ) == 2):
             civ = civ[1]
