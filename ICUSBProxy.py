@@ -70,11 +70,11 @@ class S(BaseHTTPRequestHandler):
                     response = ''
 
                 if server_verbose > 0:
-                    serial.Serial.flush()
+                    self.Serial.flush()
                     print('Serial device ' + client_serial + ' is up...')
             except:
                 if server_verbose > 0:
-                    serial.Serial.flush()
+                    self.Serial.flush()
                     print('Serial device ' + client_serial + ' is down...')
                 self._set_error()
         else:
