@@ -11,7 +11,7 @@ import cgi
 import serial
 
 name = "ICUSBProxy"
-version = "0.0.3"
+version = "0.0.4"
 client_timeout = 0.02
 server_verbose = 0
 
@@ -30,48 +30,54 @@ class S(BaseHTTPRequestHandler):
         if server_verbose > 1:        
             logging.info("GET request,\nPath: %s\nHeaders:\n%s\n", str(self.path), str(self.headers))
 
+        # Receive response
+        response = ''
+
         civ = str(self.path).split('=')
-        civ = civ[1]
 
-        #civ = 'fe,fe,a4,e0,00,56,34,12,07,00,fd,115200,/dev/ttyUSB2'  # Debug trace
-        #civ = 'fe,fe,a4,e0,03,fd,115200,/dev/ttyUSB2'                 # Debug trace
+        if(len(civ) == 2):
+            civ = civ[1]
 
-        civ = civ.split(',')
+            #civ = 'fe,fe,a4,e0,00,56,34,12,07,00,fd,115200,/dev/ttyUSB2'  # Debug trace
+            #civ = 'fe,fe,a4,e0,03,fd,115200,/dev/ttyUSB2'                 # Debug trace
 
-        client_serial = civ.pop()
-        client_baudrate = civ.pop()
-        client_adresse = civ[2]
+            civ = civ.split(',')
 
-        try:
-            usb = serial.Serial(client_serial, client_baudrate, timeout=client_timeout)
-            usb.setDTR(False)
-            usb.setRTS(False)            
+            client_serial = civ.pop()
+            client_baudrate = civ.pop()
+            client_adresse = civ[2]
 
-            # Send command
-            command = []
+            try:
+                usb = serial.Serial(client_serial, client_baudrate, timeout=client_timeout)
+                usb.setDTR(False)
+                usb.setRTS(False)            
 
-            for value in civ:
-                command.append(int(value, 16))
+                # Send command
+                command = []
 
-            usb.write(serial.to_bytes(command))
+                for value in civ:
+                    command.append(int(value, 16))
 
-            # Receive response
-            response = ''
+                usb.write(serial.to_bytes(command))
 
-            data = usb.read(size=16) # Set size to something high
-            for value in data:
-                response += '{:02x}'.format(value)
+                data = usb.read(size=16) # Set size to something high
+                for value in data:
+                    response += '{:02x}'.format(value)
 
-            # Check if bad response    
-            if(response == "fefee0" + client_adresse + "fafd"):
-                response = ''
+                # Check if bad response    
+                if(response == "fefee0" + client_adresse + "fafd"):
+                    response = ''
 
+                if server_verbose > 0:
+                    print('Serial device ' + client_serial + ' is up...')
+            except:
+                if server_verbose > 0:
+                    print('Serial device ' + client_serial + ' is down...')
+                self._set_error()
+        else:
             if server_verbose > 0:
-                print('Serial device ' + client_serial + ' is up...')
-        except:
-            if server_verbose > 0:
-                print('Serial device ' + client_serial + ' is down...')
-            self._set_error()
+                print('Bad request ' + civ)
+                self._set_error()
 
         # End properly
         try:
