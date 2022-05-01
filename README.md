@@ -30,8 +30,8 @@ As a PC, I'm using a simple Raspberry Pi under Raspbian. But it could work with 
 Examples,
 
 ```
-civ = fe,fe,a4,e0,00,56,34,12,07,00,fd,115900,/dev/ttyUSB0
-civ = fe,fe,a4,e0,03,fd,115900,/dev/ttyACM0
+civ = fe,fe,a4,e0,00,56,34,12,07,00,fd,115200,/dev/ttyUSB0
+civ = fe,fe,a4,e0,03,fd,115200,/dev/ttyACM0
 ```
 
 # Installation
@@ -65,7 +65,7 @@ Many thanks to [mdonkers](https://gist.github.com/mdonkers/63e115cc0c79b4f6b8b3a
 
 # Donations
 
-SSpecial thanks to Rolf Schroeder, Brian Garber, Matt B-Wilkinson, Robert Agnew, Meinhard Frank Günther, Johan Hansson, Tadeusz Pater, Frederic Ulmer, Joshua Murray, Mark Hammond and Angel Mateu Muzzio for their donations. That’s so kind of them. Thanks so much 🙏🏻
+Special thanks to Rolf Schroeder DL8BAG, Brian Garber WB8AM, Matt B-Wilkinson M6VWM, Robert Agnew KD0TVP, Meinhard Frank Günther DL0CN, Johan Hansson SM0TSC, Tadeusz Pater VA7CPM, Frederic Ulmer F4ESO, Joshua Murray M0JMO, Mark Hammond N8MH, Angel Mateu Muzzio EA4GIG, Hiroshi Sasaki JL7KGW, Robert John Williams VK3IE and Mark Bumstead M0IAX for their donations. That’s so kind of them. Thanks so much 🙏🏻
 
 If you find this project fun and useful then [offer me a beer](https://www.paypal.me/F4HWN) :) 
 
