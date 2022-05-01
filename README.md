@@ -11,7 +11,7 @@ This project allows to set up an HTTP _proxy_ allowing to talk wirelessly, from 
 
 > I don't own the IC-9700, so I haven't tested it. But it seems to work well.
 
-This project was made to work with my ICMultiMeter and ICSMeter on M5Stack.
+This project was made to work with my [ICMultiMeter](https://github.com/armel/ICMultiMeter) and [ICSMeter](https://github.com/armel/ICSMeter) on M5Stack.
 
 # Technical architecture
 
