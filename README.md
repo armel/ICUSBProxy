@@ -9,9 +9,9 @@ The Icom IC-7300 or IC-9700 transceivers do not have Bluetooth or WiFi support.
 
 This project allows to set up an HTTP _proxy_ allowing to talk wirelessly, from an M5Stack (or other equipment), with an Icom transceiver like IC-7300 or IC-9700 and sending CI-V commands.
 
-> I don't own the IC-9700, so I haven't tested it.
+> I don't own the IC-9700, so I haven't tested it. But it seems to work well.
 
-This project was made to work with my ICMultiMeter on M5Stack.
+This project was made to work with my ICMultiMeter and ICSMeter on M5Stack.
 
 # Technical architecture
 
