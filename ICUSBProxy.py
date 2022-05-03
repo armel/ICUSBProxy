@@ -9,7 +9,6 @@ from http.server import BaseHTTPRequestHandler, HTTPServer
 import logging
 import cgi
 import serial
-import socket
 
 name = "ICUSBProxy"
 version = "0.0.4"
@@ -50,10 +49,9 @@ class S(BaseHTTPRequestHandler):
             client_adresse = civ[2]
 
             try:
-                usb = serial.Serial(client_serial, client_baudrate, timeout=client_timeout)
-                usb.setDTR(False)
-                usb.setRTS(False)            
-
+                #usb = serial.Serial(client_serial, client_baudrate, timeout=client_timeout)
+                usb = serial.Serial(client_serial, client_baudrate, timeout=None)
+                
                 # Send command
                 command = []
 
@@ -96,11 +94,7 @@ def run(server_class=HTTPServer, handler_class=S, port=1234):
         logging.basicConfig(level=logging.INFO)
     server_address = ('', port)
     httpd = server_class(server_address, handler_class)
-    
-    hostname = socket.gethostname()
-    local_ip = socket.gethostbyname(hostname)
-
-    print('Starting ' + name + ' v' + version + ' HTTPD on IP ' + local_ip + ' Port ' + port)
+    print('Starting ' + name + ' v' + version + ' HTTPD on Port', port)
     try:
         httpd.serve_forever()
     except KeyboardInterrupt:
