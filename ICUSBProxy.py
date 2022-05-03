@@ -50,7 +50,7 @@ class S(BaseHTTPRequestHandler):
 
             try:
                 #usb = serial.Serial(client_serial, client_baudrate, timeout=client_timeout)
-                usb = serial.Serial(client_serial, client_baudrate, timeout=None)
+                usb = serial.Serial(client_serial, client_baudrate, timeout=0)
                 
                 # Send command
                 command = []
