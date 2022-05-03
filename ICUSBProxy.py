@@ -95,7 +95,11 @@ def run(server_class=HTTPServer, handler_class=S, port=1234):
         logging.basicConfig(level=logging.INFO)
     server_address = ('', port)
     httpd = server_class(server_address, handler_class)
-    print('Starting ' + name + ' v' + version + ' HTTPD on Port', port)
+    
+    hostname = socket.gethostname()
+    local_ip = socket.gethostbyname(hostname)
+
+    print('Starting ' + name + ' v' + version + ' HTTPD on IP ' + local_ip + ' Port ' + port)
     try:
         httpd.serve_forever()
     except KeyboardInterrupt:
