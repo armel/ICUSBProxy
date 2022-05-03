@@ -70,6 +70,8 @@ class S(BaseHTTPRequestHandler):
 
                 if server_verbose > 0:
                     print('Serial device ' + client_serial + ' is up...')
+
+                usb.close();
             except:
                 if server_verbose > 0:
                     print('Serial device ' + client_serial + ' is down...')
@@ -79,7 +81,7 @@ class S(BaseHTTPRequestHandler):
                 print('Bad request ' + request)
                 self._set_error()
 
-        # End properly
+        # End properly        
         try:
             self._set_response()
             self.wfile.write("{}".format(response).encode('utf-8'))
