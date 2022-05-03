@@ -9,6 +9,7 @@ from http.server import BaseHTTPRequestHandler, HTTPServer
 import logging
 import cgi
 import serial
+import socket
 
 name = "ICUSBProxy"
 version = "0.0.4"
