@@ -12,7 +12,7 @@ import serial
 
 name = "ICUSBProxy"
 version = "0.0.4"
-client_timeout = 0.02
+client_timeout = 0.01
 server_verbose = 0
 
 class S(BaseHTTPRequestHandler):
@@ -50,7 +50,7 @@ class S(BaseHTTPRequestHandler):
 
             try:
                 #usb = serial.Serial(client_serial, client_baudrate, timeout=client_timeout)
-                usb = serial.Serial(client_serial, client_baudrate, timeout=0.01)
+                usb = serial.Serial(client_serial, client_baudrate, timeout=client_timeout)
                 
                 # Send command
                 command = []
