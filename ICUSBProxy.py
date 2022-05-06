@@ -2,7 +2,7 @@
 '''
 Copyright (c) F4HWN Armel. All rights reserved.
 Licensed under the MIT license. See LICENSE file in the project root for full license information.
-Usage: ./ICUSBProxy.py [<port>]
+Usage: ./ICUSBProxy.py [port] [error level]
 '''
 
 from http.server import BaseHTTPRequestHandler, HTTPServer
@@ -11,8 +11,8 @@ import cgi
 import serial
 
 name = "ICUSBProxy"
-version = "0.0.4"
-client_timeout = 0.02
+version = "0.0.5"
+client_timeout = 0.01
 server_verbose = 0
 
 class S(BaseHTTPRequestHandler):
@@ -50,9 +50,7 @@ class S(BaseHTTPRequestHandler):
 
             try:
                 usb = serial.Serial(client_serial, client_baudrate, timeout=client_timeout)
-                usb.setDTR(False)
-                usb.setRTS(False)            
-
+                
                 # Send command
                 command = []
 
@@ -71,6 +69,8 @@ class S(BaseHTTPRequestHandler):
 
                 if server_verbose > 0:
                     print('Serial device ' + client_serial + ' is up...')
+
+                usb.close();
             except:
                 if server_verbose > 0:
                     print('Serial device ' + client_serial + ' is down...')
@@ -80,7 +80,7 @@ class S(BaseHTTPRequestHandler):
                 print('Bad request ' + request)
                 self._set_error()
 
-        # End properly
+        # End properly        
         try:
             self._set_response()
             self.wfile.write("{}".format(response).encode('utf-8'))
