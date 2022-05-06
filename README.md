@@ -62,6 +62,7 @@ And if you want to run this process even after logging out from the shell/termin
  
 Many thanks to [mdonkers](https://gist.github.com/mdonkers/63e115cc0c79b4f6b8b3a6b797e485c7).
 
+Icom and the Icom logo are registered trademarks of Icom Incorporated (Japan) in Japan, the United States, the United Kingdom, Germany, France, Spain, Russia, Australia, New Zealand, and/or other countries.
 
 # Donations
 

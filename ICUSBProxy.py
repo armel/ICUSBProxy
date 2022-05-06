@@ -2,7 +2,7 @@
 '''
 Copyright (c) F4HWN Armel. All rights reserved.
 Licensed under the MIT license. See LICENSE file in the project root for full license information.
-Usage: ./ICUSBProxy.py [<port>]
+Usage: ./ICUSBProxy.py [port] [error level]
 '''
 
 from http.server import BaseHTTPRequestHandler, HTTPServer
@@ -11,7 +11,7 @@ import cgi
 import serial
 
 name = "ICUSBProxy"
-version = "0.0.4"
+version = "0.0.5"
 client_timeout = 0.01
 server_verbose = 0
 
@@ -49,7 +49,6 @@ class S(BaseHTTPRequestHandler):
             client_adresse = civ[2]
 
             try:
-                #usb = serial.Serial(client_serial, client_baudrate, timeout=client_timeout)
                 usb = serial.Serial(client_serial, client_baudrate, timeout=client_timeout)
                 
                 # Send command
