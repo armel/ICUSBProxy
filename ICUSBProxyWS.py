@@ -37,7 +37,6 @@ name           = "ICUSBProxy"
 version        = "0.1.0"
 client_timeout = 0.01
 server_verbose = 2
-demo_mode      = 1 # use this when no IC is actually connected, will send dummy data
 
 UARTS      = [] # UART's are shared between HTTP Server and WebSockets/Serial thread, but also across M5 Devices
 uart_count = 0
@@ -243,16 +242,8 @@ def UARTPoller():
                         if subscription.freq == 0: # one time subscription self-deletes after use
                             M5Clients[M5ClientId].subscriptions.remove( subscription )
                     else:
-                        if demo_mode == 1:
-                            cmd = str(subscription.cmd)
-                            resp = demo_response( cmd[4:6], cmd[6:8], cmd[8:14] )
-                            if resp != False:
-                                WSEmit( M5Client.id, resp )
-                            else:
-                                print("Bad command ",  cmd[6:8], cmd[8:14] )
-                        else:
-                            ConsolePrintError( subscription.uart.tty + " is not available" )
-                            WSEmit( M5Client.id, "UART DOWN" )
+                        ConsolePrintError( subscription.uart.tty + " is not available" )
+                        WSEmit( M5Client.id, "UART DOWN" )
 
         time.sleep( sleep_time ) # avoid loopbacks
 
@@ -318,7 +309,7 @@ class S(BaseHTTPRequestHandler):
             sub.uart.id     = uart_count
             sub.uart.mutex  = Lock()
             uart_count      = uart_count+1
-            if demo_mode == 0 and tty.find("://") != -1 and tty not in remote_serial_ports:
+            if tty.find("://") != -1 and tty not in remote_serial_ports:
                 try:
                     sub.uart.serial = serial.serial_for_url( tty, bauds )
                     ConsolePrintMessage("Added external UART " + tty )
@@ -418,36 +409,11 @@ class S(BaseHTTPRequestHandler):
             clt_address  = civ[2]
             civ_address  = civ[3]
 
-            if demo_mode > 0:
-                self._set_response()
-                civ_msg = ''
-                # civ.shift() does not exist and civ.reverse().pop().pop().pop().pop().reverse() not possible with python lists :-(
-                civ.reverse()
-                civ.pop()
-                civ.pop()
-                civ.pop()
-                civ.pop()
-                civ.reverse()
-
-                for value in civ:
-                    civ_msg += '{:02x}'.format(int(value, 16))
-
-                response = demo_response( clt_address, civ_address, civ_msg )
-                if response == False:
-                    response = ''
-
-                if server_verbose > 0:
-                    ConsolePrintMessage('<< Received CIV packet: ' +civ_msg )
-                    ConsolePrintMessage('>> Sending response: ' +response)
-                self.wfile.write("{}".format( response ).encode('utf-8'))
-                return
-
             if HasPort( client_serial ) != True:
                 ConsolePrintMessage('Serial device ' + client_serial + ' is down...')
                 self._set_error()
                 self.wfile.write("{}".format("UART DOWN").encode('utf-8'))
                 return
-
 
             try:
                 usb = None
