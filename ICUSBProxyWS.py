@@ -40,7 +40,6 @@ server_verbose = 2
 
 UARTS      = [] # UART's are shared between HTTP Server and WebSockets/Serial thread, but also across M5 Devices
 uart_count = 0
-uart = 0
 subscriptions_count = 0
 M5Clients  = [] # M5Stack devices with registered subscriptions
 connected_serial_ports = [] # currently connected COM/tty ports, repopulated every second
@@ -92,6 +91,7 @@ class M5Socket():
         self.ws            = None # WebSocket instance, e.g. self.ws = websocket.WebSocket()
 
 # Subscriptions are stored in in M5Socket().subscriptions as an array
+
 class Subscription():
     def __init__(self):
         self.id            = None # Unique ID for subscription
