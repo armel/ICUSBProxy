@@ -40,6 +40,7 @@ server_verbose = 2
 
 UARTS      = [] # UART's are shared between HTTP Server and WebSockets/Serial thread, but also across M5 Devices
 uart_count = 0
+uart = 0
 subscriptions_count = 0
 M5Clients  = [] # M5Stack devices with registered subscriptions
 connected_serial_ports = [] # currently connected COM/tty ports, repopulated every second
