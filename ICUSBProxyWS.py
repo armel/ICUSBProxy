@@ -411,7 +411,7 @@ class S(BaseHTTPRequestHandler):
             civ_address  = civ[3]
 
             if HasPort( client_serial ) != True:
-                Serial.println("ic")
+                print("ic")
                 ConsolePrintMessage('Serial device ' + client_serial + ' is down...')
                 self._set_error()
                 self.wfile.write("{}".format("UART DOWN").encode('utf-8'))
