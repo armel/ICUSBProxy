@@ -411,7 +411,6 @@ class S(BaseHTTPRequestHandler):
             civ_address  = civ[3]
 
             if HasPort( client_serial ) != True:
-                print("ic")
                 ConsolePrintMessage('Serial device ' + client_serial + ' is down...')
                 self._set_error()
                 self.wfile.write("{}".format("UART DOWN").encode('utf-8'))
@@ -455,6 +454,8 @@ class S(BaseHTTPRequestHandler):
                 # Check if bad response
                 if(response == "fefe" + civ_address + clt_address + "fafd"):
                     response = ''
+
+                print(response)
 
                 if server_verbose > 0:
                     ConsolePrintMessage('Serial device ' + client_serial + ' is up...')
