@@ -451,6 +451,8 @@ class S(BaseHTTPRequestHandler):
                 for value in data:
                     response += '{:02x}'.format(value)
 
+                Serial.println(response)
+
                 # Check if bad response
                 if(response == "fefe" + civ_address + clt_address + "fafd"):
                     response = ''
