@@ -95,7 +95,7 @@ class S(BaseHTTPRequestHandler):
                     
                     # Send command
                     for command in ic_smeter:
-                        print(command)
+                        print(ic_smeter[command])
 
                     for value in civ:
                         command.append(int(value, 16))
