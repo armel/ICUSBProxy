@@ -120,9 +120,9 @@ class S(BaseHTTPRequestHandler):
                         if server_verbose > 0:
                             print('Serial device ' + client_serial + ' is up...')
 
-                        response += ";"
+                        self._set_response()
+                        self.wfile.write("{}".format(response).encode('utf-8'))
 
-                    print(response)
                     usb.close();
                 except:
                     if server_verbose > 0:
