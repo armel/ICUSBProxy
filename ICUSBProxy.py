@@ -97,12 +97,13 @@ class S(BaseHTTPRequestHandler):
 
                 print(client_serial, client_baudrate, client_address)
                 print("oco")
-                
+
                 try:
                     usb = serial.Serial(client_serial, client_baudrate, timeout=client_timeout)
 
                     # Send command
                     for element in ic_smeter:
+                        print("ffff")
                         civ = ic_smeter[element]
                         civ = civ.replace("00", client_address)
                         civ = civ.split(',')
@@ -110,8 +111,8 @@ class S(BaseHTTPRequestHandler):
                         for value in civ:
                             command.append(int(value, 16))
 
-                        logging.info(command)
-
+                        print(command)
+                        
                         usb.write(serial.to_bytes(command))
 
                         data = usb.read(size=16) # Set size to something high
