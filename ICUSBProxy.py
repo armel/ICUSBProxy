@@ -108,6 +108,8 @@ class S(BaseHTTPRequestHandler):
                         for value in civ:
                             command.append(int(value, 16))
 
+                        print(command)
+
                         usb.write(serial.to_bytes(command))
 
                         data = usb.read(size=16) # Set size to something high
