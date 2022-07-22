@@ -97,9 +97,7 @@ class S(BaseHTTPRequestHandler):
 
                 try:
                     usb = serial.Serial(client_serial, client_baudrate, timeout=client_timeout)
-                    
-                    print("ici")
-                    
+
                     # Send command
                     for element in ic_smeter:
                         civ = ic_smeter[element]
@@ -108,6 +106,8 @@ class S(BaseHTTPRequestHandler):
 
                         for value in civ:
                             command.append(int(value, 16))
+
+                        print("iceeei")
 
                         logging.info(command)
 
