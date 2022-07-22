@@ -103,6 +103,7 @@ class S(BaseHTTPRequestHandler):
                     for element in ic_smeter:
                         civ = ic_smeter[element]
                         civ = civ.replace("00", client_address)
+                        civ = civ.split(',')
 
                         for value in civ:
                             command.append(int(value, 16))
