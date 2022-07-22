@@ -101,9 +101,11 @@ class S(BaseHTTPRequestHandler):
                     
                     # Send command
                     for element in ic_smeter:
-                        command = ic_smeter[element]
+                        civ = ic_smeter[element]
+                        civ = civ.replace("00", client_address)
 
-                        command = command.replace("00", client_address)
+                        for value in civ:
+                            command.append(int(value, 16))
 
                         usb.write(serial.to_bytes(command))
 
