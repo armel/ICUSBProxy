@@ -17,7 +17,7 @@ version = "0.0.5"
 client_timeout = 0.01
 server_verbose = 0
 
- daemon
+#daemon
 def PortsEnumerator():
     global UARTS, connected_serial_ports
     while True:
