@@ -25,17 +25,6 @@ ic_smeter = {
     #"TX":           "fe,fe,00,e0,1c,00,fd"
 }
 
-command = []
-for element in ic_smeter:
-    civ = ic_smeter[element]
-    civ = civ.replace("00", "a4")
-    civ = civ.split(',')
-
-    for value in civ:
-        command.append(int(value, 16))
-
-    print(command)
-
 class S(BaseHTTPRequestHandler):
     def _set_response(self):
         self.send_response(200)
@@ -117,8 +106,6 @@ class S(BaseHTTPRequestHandler):
 
                         for value in civ:
                             command.append(int(value, 16))
-
-                        print(command)
 
                         usb.write(serial.to_bytes(command))
 
