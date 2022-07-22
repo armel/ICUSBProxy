@@ -97,6 +97,8 @@ class S(BaseHTTPRequestHandler):
                     for element in ic_smeter:
                         command = ic_smeter[element]
 
+                        print(command)
+
                         usb.write(serial.to_bytes(command))
 
                         data = usb.read(size=16) # Set size to something high
@@ -112,7 +114,6 @@ class S(BaseHTTPRequestHandler):
 
                         response += ";"
 
-                    print(response)
                     usb.close();
                 except:
                     if server_verbose > 0:
