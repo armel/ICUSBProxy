@@ -51,7 +51,7 @@ class S(BaseHTTPRequestHandler):
 
             civ = civ.split(',')
 
-            if(len(civ) > 2):
+            if(len(civ) > 3):
 
                 #civ = 'fe,fe,a4,e0,00,56,34,12,07,00,fd,115200,/dev/ttyUSB2'  # Debug trace
                 #civ = 'fe,fe,a4,e0,03,fd,115200,/dev/ttyUSB2'                 # Debug trace
