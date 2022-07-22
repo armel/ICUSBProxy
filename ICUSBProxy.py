@@ -95,7 +95,7 @@ class S(BaseHTTPRequestHandler):
                     
                     # Send command
                     for element in ic_smeter:
-                        commande = ic_smeter[element]
+                        command = ic_smeter[element]
 
                         usb.write(serial.to_bytes(command))
 
