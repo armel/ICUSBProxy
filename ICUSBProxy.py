@@ -119,7 +119,7 @@ class S(BaseHTTPRequestHandler):
                         print(response)
 
                         # Check if bad response    
-                        if(response == "fefee0" + client_address + "fafd"):
+                        if(response == "fefee0" + client_address + "fafd" || response == ''):
                             response = ''
                             break
                         else:
