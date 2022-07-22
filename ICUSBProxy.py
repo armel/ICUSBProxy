@@ -19,10 +19,10 @@ ic_smeter = {
     "S":            "fe,fe,_,e0,15,02,fd",
     "SWR":          "fe,fe,_,e0,15,12,fd",
     "PWD":          "fe,fe,_,e0,15,11,fd",
-    "DataMode":     "fe,fe,_,e0,1a,06,fd",
+    #"DataMode":     "fe,fe,_,e0,1a,06,fd",
     "Frequency":    "fe,fe,_,e0,03,fd",
     "Mode":         "fe,fe,_,e0,04,fd",
-    "TX":           "fe,fe,_,e0,1c,00,fd"
+    #"TX":           "fe,fe,_,e0,1c,00,fd"
 }
 
 class S(BaseHTTPRequestHandler):
