@@ -109,7 +109,8 @@ class S(BaseHTTPRequestHandler):
                         civ = civ.replace("00", client_address)
                         print(civ)
                         civ = civ.split(',')
-
+                        print(civ)
+                        
                         for value in civ:
                             command.append(int(value, 16))
 
