@@ -105,8 +105,6 @@ class S(BaseHTTPRequestHandler):
 
                         command = command.replace("00", client_address)
 
-                        print(command)
-
                         usb.write(serial.to_bytes(command))
 
                         data = usb.read(size=16) # Set size to something high
@@ -119,9 +117,6 @@ class S(BaseHTTPRequestHandler):
 
                         if server_verbose > 0:
                             print('Serial device ' + client_serial + ' is up...')
-
-                        self._set_response()
-                        self.wfile.write("{}".format(response).encode('utf-8'))
 
                     usb.close();
                 except:
