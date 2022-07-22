@@ -25,6 +25,7 @@ ic_smeter = {
     #"TX":           "fe,fe,00,e0,1c,00,fd"
 }
 
+command = []
 for element in ic_smeter:
     civ = ic_smeter[element]
     civ = civ.replace("00", "a4")
