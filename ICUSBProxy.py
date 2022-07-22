@@ -94,6 +94,7 @@ class S(BaseHTTPRequestHandler):
                     usb = serial.Serial(client_serial, client_baudrate, timeout=client_timeout)
                     
                     # Send command
+                    print("ici")
                     for element in ic_smeter:
                         command = ic_smeter[element]
 
