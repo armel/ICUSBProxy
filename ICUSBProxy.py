@@ -25,6 +25,17 @@ ic_smeter = {
     "TX":           "fe,fe,00,e0,1c,00,fd"
 }
 
+for element in ic_smeter:
+    command = ic_smeter[element]
+
+    command = command.replace("00", client_adresse)
+
+
+    print(ic_smeter(element))
+    print(command)
+
+    exit();
+
 class S(BaseHTTPRequestHandler):
     def _set_response(self):
         self.send_response(200)
@@ -94,7 +105,6 @@ class S(BaseHTTPRequestHandler):
                     usb = serial.Serial(client_serial, client_baudrate, timeout=client_timeout)
                     
                     # Send command
-                    print("ici")
                     for element in ic_smeter:
                         command = ic_smeter[element]
 
