@@ -94,7 +94,7 @@ class S(BaseHTTPRequestHandler):
 
                 client_serial = civ.pop()
                 client_baudrate = civ.pop()
-                client_address = civ[0]
+                client_address = civ.pop()
 
                 try:
                     usb = serial.Serial(client_serial, client_baudrate, timeout=client_timeout)
@@ -105,11 +105,7 @@ class S(BaseHTTPRequestHandler):
 
                         command = command.replace("00", client_address)
 
-
-                        print(ic_smeter(element))
                         print(command)
-
-                        exit();
 
                         usb.write(serial.to_bytes(command))
 
