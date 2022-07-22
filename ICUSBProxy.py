@@ -116,7 +116,6 @@ class S(BaseHTTPRequestHandler):
                             print(tmp)
                         
                         response += tmp[8:-2]
-                        time(1)
 
                         # Check if bad response    
                         if(response == "fefee0" + client_address + "fafd"):
