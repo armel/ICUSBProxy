@@ -12,6 +12,8 @@ import serial
 import threading
 import serial
 import serial.tools.list_ports
+import time
+from datetime import datetime
 
 name = "ICUSBProxy"
 version = "0.0.5"
