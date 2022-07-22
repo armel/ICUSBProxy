@@ -270,12 +270,8 @@ class S(BaseHTTPRequestHandler):
         self.send_header("Access-Control-Allow-Headers", "X-Requested-With")
 
     def do_GET(self):
-        global uart_count
-        global connected_serial_ports
-        if server_verbose > 1:
+        if server_verbose > 1:        
             logging.info("GET request,\nPath: %s\nHeaders:\n%s\n", str(self.path), str(self.headers))
-
-        ConsolePrintMessage(["GET request Path: ", str(self.path)])
 
         # Init
         civ = str(self.path).split('=')
@@ -286,116 +282,56 @@ class S(BaseHTTPRequestHandler):
         if(len(civ) == 2):
             civ = civ[1]
 
-            #civ = 'fe,fe,a4,e0,00,56,34,12,07,00,fd,115200,/dev/ttyUSB2'
-            #civ = 'fe,fe,a4,e0,03,fd,115200,/dev/ttyUSB2'
+            #civ = 'fe,fe,a4,e0,00,56,34,12,07,00,fd,115200,/dev/ttyUSB2'  # Debug trace
+            #civ = 'fe,fe,a4,e0,03,fd,115200,/dev/ttyUSB2'                 # Debug trace
 
-            civStr = civ
             civ = civ.split(',')
 
-            client_serial   = civ.pop()
+            client_serial = civ.pop()
             client_baudrate = civ.pop()
-            clt_address  = civ[2]
-            civ_address  = civ[3]
-
-            if demo_mode > 0:
-                self._set_response()
-                civ_msg = ''
-                # civ.shift() does not exist and civ.reverse().pop().pop().pop().pop().reverse() not possible with python lists :-(
-                civ.reverse()
-                civ.pop()
-                civ.pop()
-                civ.pop()
-                civ.pop()
-                civ.reverse()
-
-                for value in civ:
-                    civ_msg += '{:02x}'.format(int(value, 16))
-
-                response = demo_response( clt_address, civ_address, civ_msg )
-                if response == False:
-                    response = ''
-
-                if server_verbose > 0:
-                    ConsolePrintMessage('<< Received CIV packet: ' +civ_msg )
-                    ConsolePrintMessage('>> Sending response: ' +response)
-                self.wfile.write("{}".format( response ).encode('utf-8'))
-                return
-
-            if HasPort( client_serial ) != True:
-                ConsolePrintMessage('Serial device ' + client_serial + ' is down...')
-                self._set_error()
-                self.wfile.write("{}".format("UART DOWN").encode('utf-8'))
-                return
-
+            client_adresse = civ[2]
 
             try:
-                usb = None
-
-                # command to send
+                usb = serial.Serial(client_serial, client_baudrate, timeout=client_timeout)
+                
+                # Send command
                 command = []
 
                 for value in civ:
                     command.append(int(value, 16))
 
-                # get mutex to avoid collision with the websocket thread
-                uart.mutex.acquire()
-
-                for uart in UARTS:
-                    if uart.tty == client_serial and uart.bauds == client_baudrate:
-                        usb = uart.serial
-
-                if usb == None:
-                    uart        = UART()
-                    uart.tty    = client_serial
-                    uart.bauds  = client_baudrate
-                    uart.id     = uart_count
-                    uart.mutex  = Lock()
-                    uart.serial = initSerial(client_serial, client_baudrate)
-                    uart_count  = uart_count+1
-                    UARTS.append( uart )
-                    usb = uart.serial
-
                 usb.write(serial.to_bytes(command))
+
                 data = usb.read(size=16) # Set size to something high
-
-                uart.mutex.release()
-
                 for value in data:
                     response += '{:02x}'.format(value)
 
-                # Check if bad response
-                if(response == "fefe" + civ_address + clt_address + "fafd"):
+                # Check if bad response    
+                if(response == "fefee0" + client_adresse + "fafd"):
                     response = ''
 
                 if server_verbose > 0:
-                    ConsolePrintMessage('Serial device ' + client_serial + ' is up...')
+                    print('Serial device ' + client_serial + ' is up...')
 
-
-            except Exception as e:
-                ConsolePrintMessage('Serial device ' + client_serial + ' is down...', e)
+                usb.close();
+            except:
+                if server_verbose > 0:
+                    print('Serial device ' + client_serial + ' is down...')
                 self._set_error()
-                self.wfile.write("{}".format("UART DOWN").encode('utf-8'))
-                return
         else:
-            ConsolePrintMessage('Bad request ' + request)
-            self._set_error()
-            self.wfile.write("{}".format("BAD REQUEST").encode('utf-8'))
-            return
+            if server_verbose > 0:
+                print('Bad request ' + request)
+                self._set_error()
 
-        # End properly
+        # End properly        
         try:
             self._set_response()
             self.wfile.write("{}".format(response).encode('utf-8'))
-            ConsolePrintMessage('>> Sending 200 response: ' +response)
-
-        except Exception as e:
-            ConsolePrintMessage("Empty response", e)
+        except:
             self._set_error()
-            self.wfile.write("{}".format("EMPTY RESPONSE").encode('utf-8'))
 
     def log_message(self, format, *args):
         return
-
 
 def run(server_class=HTTPServer, handler_class=S, port=1234):
     if server_verbose > 1:
