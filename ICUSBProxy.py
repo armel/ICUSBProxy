@@ -95,9 +95,7 @@ class S(BaseHTTPRequestHandler):
                 client_baudrate = civ.pop()
                 client_address = civ.pop()
 
-                print(client_serial, client_baudrate, client_address)
-
-                try:
+#                try:
                     usb = serial.Serial(client_serial, client_baudrate, timeout=client_timeout)
 
                     # Send command
@@ -106,9 +104,6 @@ class S(BaseHTTPRequestHandler):
                         civ = civ.replace("00", client_address)
                         civ = civ.split(',')
 
-
-                        print(civ)
-                        print(command)
                         for value in civ:
                             command.append(int(value, 16))
 
@@ -130,10 +125,10 @@ class S(BaseHTTPRequestHandler):
 
                     print("la")
                     usb.close();
-                except:
-                    if server_verbose > 0:
-                        print('Serial device ' + client_serial + ' is down...')
-                    self._set_error()
+#                except:
+#                    if server_verbose > 0:
+#                        print('Serial device ' + client_serial + ' is down...')
+#                    self._set_error()
 
         else:
             if server_verbose > 0:
