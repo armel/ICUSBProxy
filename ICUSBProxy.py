@@ -34,7 +34,7 @@ for element in ic_smeter:
     print(ic_smeter[element])
     print(command)
 
-    exit();
+exit();
 
 class S(BaseHTTPRequestHandler):
     def _set_response(self):
