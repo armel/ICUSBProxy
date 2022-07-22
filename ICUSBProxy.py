@@ -112,7 +112,7 @@ class S(BaseHTTPRequestHandler):
                         data = usb.read(size=16) # Set size to something high
                         for value in data:
                             tmp = '{:02x}'.format(value)
-                            response += tmp[8:-2]
+                            response += tmp[:-2]
 
                         # Check if bad response    
                         if(response == "fefee0" + client_address + "fafd"):
