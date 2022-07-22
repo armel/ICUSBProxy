@@ -269,7 +269,6 @@ class S(BaseHTTPRequestHandler):
         self.send_header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
         self.send_header("Access-Control-Allow-Headers", "X-Requested-With")
 
-    '''
     def do_GET(self):
         if server_verbose > 1:        
             logging.info("GET request,\nPath: %s\nHeaders:\n%s\n", str(self.path), str(self.headers))
@@ -335,7 +334,6 @@ class S(BaseHTTPRequestHandler):
         return
 
     '''
-
     def do_GET(self):
         global uart_count
         global connected_serial_ports
@@ -435,6 +433,7 @@ class S(BaseHTTPRequestHandler):
 
     def log_message(self, format, *args):
         return
+    '''
 
 
 def run(server_class=HTTPServer, handler_class=S, port=1234):
