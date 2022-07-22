@@ -11,6 +11,7 @@ import cgi
 import serial
 import threading
 import serial
+import serial.tools.list_ports
 
 name = "ICUSBProxy"
 version = "0.0.5"
