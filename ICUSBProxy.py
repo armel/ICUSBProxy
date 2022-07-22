@@ -105,14 +105,16 @@ class S(BaseHTTPRequestHandler):
                     for element in ic_smeter:
                         print("ffff")
                         civ = ic_smeter[element]
+                        print(civ)
                         civ = civ.replace("00", client_address)
+                        print(civ)
                         civ = civ.split(',')
 
                         for value in civ:
                             command.append(int(value, 16))
 
                         print(command)
-                        
+
                         usb.write(serial.to_bytes(command))
 
                         data = usb.read(size=16) # Set size to something high
