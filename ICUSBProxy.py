@@ -107,7 +107,6 @@ class S(BaseHTTPRequestHandler):
                         for value in civ:
                             command.append(int(value, 16))
 
-                        print(command)
                         usb.write(serial.to_bytes(command))
 
                         data = usb.read(size=16) # Set size to something high
@@ -120,12 +119,14 @@ class S(BaseHTTPRequestHandler):
                         # Check if bad response    
                         if(response == "fefee0" + client_address + "fafd"):
                             response = ''
+                            break
                         else:
                             response +=";"
 
                         if server_verbose > 0:
                             print('Serial device ' + client_serial + ' is up...')
 
+                    print(response)
                     usb.close();
                 except:
                     if server_verbose > 0:
