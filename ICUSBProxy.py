@@ -15,6 +15,24 @@ version = "0.0.5"
 client_timeout = 0.01
 server_verbose = 0
 
+ daemon
+def PortsEnumerator():
+    global UARTS, connected_serial_ports
+    while True:
+        tmp_ports = [tuple(p) for p in list(serial.tools.list_ports.comports())]
+        #tmp_ports.append( remote_serial_ports )
+        if len(tmp_ports)>len(connected_serial_ports):
+            new_device = list(set(tmp_ports) - set(connected_serial_ports))
+            ConsolePrintMessage(["New Device(s): ", new_device] )
+            for uart in UARTS:
+                if uart.tty == new_device[0]:
+                    uart.serial = initSerial(  uart.tty, uart.bauds )
+        elif len(tmp_ports)<len(connected_serial_ports):
+            old_device = list(set(connected_serial_ports) - set(tmp_ports))
+            ConsolePrintMessage(["Device(s) removed: ", old_device] )
+        connected_serial_ports = tmp_ports
+        time.sleep(1)
+
 class S(BaseHTTPRequestHandler):
     def _set_response(self):
         self.send_response(200)
@@ -104,6 +122,12 @@ def run(server_class=HTTPServer, handler_class=S, port=1234):
     print('Stopping ' + name + ' v' + version + ' HTTPD...\n')
 
 if __name__ == '__main__':
+
+    # spawn a new thread to scan for serial devices with an active connection
+    port_controller = threading.Thread(target=PortsEnumerator, name="PortsScan")
+    port_controller.setDaemon(True)
+    port_controller.start()
+
     from sys import argv
 
     if len(argv) == 2:
