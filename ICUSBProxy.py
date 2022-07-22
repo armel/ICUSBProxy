@@ -101,7 +101,7 @@ class S(BaseHTTPRequestHandler):
                         command = command.replace("00", client_adresse)
 
 
-                        print(ic_smeter[element])
+                        print(ic_smeter(element))
                         print(command)
 
                         exit();
