@@ -18,6 +18,8 @@ version = "0.0.5"
 client_timeout = 0.01
 server_verbose = 0
 
+connected_serial_ports = [] # currently connected COM/tty ports, repopulated every second
+
 #daemon
 def PortsEnumerator():
     global UARTS, connected_serial_ports
