@@ -19,8 +19,19 @@ client_timeout = 0.01
 server_verbose = 0
 
 connected_serial_ports = [] # currently connected COM/tty ports, repopulated every second
+last_message = ""
 
-#daemon
+def ConsolePrintMessage( msg, error=None ):
+    global last_message, server_verbose
+    if error!=None:
+        ConsolePrintError( error )
+    if server_verbose != 0:
+        if server_verbose < 2 and last_message == msg:
+            return
+        now = datetime.now().strftime("%H:%M:%S.%f")[:-3]
+        print( [now, msg] )
+        last_message = msg
+
 def PortsEnumerator():
     global UARTS, connected_serial_ports
     while True:
