@@ -96,35 +96,35 @@ class S(BaseHTTPRequestHandler):
                 client_address = civ.pop()
 
 #                try:
-                    usb = serial.Serial(client_serial, client_baudrate, timeout=client_timeout)
+                usb = serial.Serial(client_serial, client_baudrate, timeout=client_timeout)
 
-                    # Send command
-                    for element in ic_smeter:
-                        civ = ic_smeter[element]
-                        civ = civ.replace("00", client_address)
-                        civ = civ.split(',')
+                # Send command
+                for element in ic_smeter:
+                    civ = ic_smeter[element]
+                    civ = civ.replace("00", client_address)
+                    civ = civ.split(',')
 
-                        for value in civ:
-                            command.append(int(value, 16))
+                    for value in civ:
+                        command.append(int(value, 16))
 
-                        print(command)
-                        print(civ)
+                    print(command)
+                    print(civ)
 
-                        usb.write(serial.to_bytes(command))
+                    usb.write(serial.to_bytes(command))
 
-                        data = usb.read(size=16) # Set size to something high
-                        for value in data:
-                            response += '{:02x}'.format(value)
+                    data = usb.read(size=16) # Set size to something high
+                    for value in data:
+                        response += '{:02x}'.format(value)
 
-                        # Check if bad response    
-                        if(response == "fefee0" + client_address + "fafd"):
-                            response = ''
+                    # Check if bad response    
+                    if(response == "fefee0" + client_address + "fafd"):
+                        response = ''
 
-                        if server_verbose > 0:
-                            print('Serial device ' + client_serial + ' is up...')
+                    if server_verbose > 0:
+                        print('Serial device ' + client_serial + ' is up...')
 
-                    print("la")
-                    usb.close();
+                print("la")
+                usb.close();
 #                except:
 #                    if server_verbose > 0:
 #                        print('Serial device ' + client_serial + ' is down...')
