@@ -31,7 +31,7 @@ for element in ic_smeter:
     command = command.replace("00", "ff")
 
 
-    print(ic_smeter(element))
+    print(ic_smeter[element])
     print(command)
 
     exit();
