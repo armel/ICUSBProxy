@@ -36,14 +36,14 @@ def ConsolePrintMessage( msg, error=None ):
         last_message = msg
 
 def PortsEnumerator():
-    global UARTS, connected_serial_ports
+    global uarts, connected_serial_ports
     while True:
         tmp_ports = [tuple(p) for p in list(serial.tools.list_ports.comports())]
         #tmp_ports.append( remote_serial_ports )
         if len(tmp_ports)>len(connected_serial_ports):
             new_device = list(set(tmp_ports) - set(connected_serial_ports))
             ConsolePrintMessage(["New Device(s): ", new_device] )
-            for uart in UARTS:
+            for uart in uarts:
                 if uart.tty == new_device[0]:
                     uart.serial = initSerial(  uart.tty, uart.bauds )
         elif len(tmp_ports)<len(connected_serial_ports):
@@ -54,7 +54,7 @@ def PortsEnumerator():
 
 def UARTPoller():
     while True:
-        global M5Clients, UARTS, connected_serial_ports, uart_message
+        global M5Clients, uarts, connected_serial_ports, uart_message
         sleep_time = 1
         for M5ClientId, M5Client in enumerate(M5Clients):
             for SubscriptionId, subscription in enumerate( M5Client.subscriptions ):
