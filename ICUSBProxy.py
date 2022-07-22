@@ -116,6 +116,8 @@ class S(BaseHTTPRequestHandler):
                         # Check if bad response    
                         if(response == "fefee0" + client_address + "fafd"):
                             response = ''
+                        else:
+                            response +=";"
 
                         if server_verbose > 0:
                             print('Serial device ' + client_serial + ' is up...')
