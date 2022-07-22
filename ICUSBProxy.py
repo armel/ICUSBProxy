@@ -20,6 +20,7 @@ server_verbose = 0
 
 connected_serial_ports = [] # currently connected COM/tty ports, repopulated every second
 last_message = ""
+UARTS      = [] # UART's are shared between HTTP Server and WebSockets/Serial thread, but also across M5 Devices
 
 def ConsolePrintMessage( msg, error=None ):
     global last_message, server_verbose
