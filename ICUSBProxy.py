@@ -110,7 +110,7 @@ class S(BaseHTTPRequestHandler):
                         usb.write(serial.to_bytes(command))
 
                         data = usb.read(size=16) # Set size to something high
-                        tmp
+                        tmp = ''
                         for value in data:
                             tmp += '{:02x}'.format(value)
                             print(tmp)
