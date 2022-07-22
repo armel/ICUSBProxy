@@ -90,14 +90,16 @@ class S(BaseHTTPRequestHandler):
                 client_serial = civ.pop()
                 client_baudrate = civ.pop()
 
-                try:                    
+                try:
+                    usb = serial.Serial(client_serial, client_baudrate, timeout=client_timeout)
+                    
                     # Send command
                     for element in ic_smeter:
                         command = ic_smeter[element]
 
-                        print(command)
+                        command = command.replace("00", client_adresse)
 
-                        usb = serial.Serial(client_serial, client_baudrate, timeout=client_timeout)
+                        print(command)
 
                         usb.write(serial.to_bytes(command))
 
@@ -114,7 +116,8 @@ class S(BaseHTTPRequestHandler):
 
                         response += ";"
 
-                        usb.close();
+                    print(response)
+                    usb.close();
                 except:
                     if server_verbose > 0:
                         print('Serial device ' + client_serial + ' is down...')
