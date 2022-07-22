@@ -22,7 +22,7 @@ server_verbose = 1
 
 connected_serial_ports = [] # currently connected COM/tty ports, repopulated every second
 last_message = ""
-UARTS      = [] # UART's are shared between HTTP Server and WebSockets/Serial thread, but also across M5 Devices
+uart = [] # uart's are shared between HTTP Server and WebSockets/Serial thread, but also across M5 Devices
 
 def ConsolePrintMessage( msg, error=None ):
     global last_message, server_verbose
@@ -52,6 +52,40 @@ def PortsEnumerator():
         connected_serial_ports = tmp_ports
         time.sleep(1)
 
+def UARTPoller():
+    while True:
+        global M5Clients, UARTS, connected_serial_ports, uart_message
+        sleep_time = 1
+        for M5ClientId, M5Client in enumerate(M5Clients):
+            for SubscriptionId, subscription in enumerate( M5Client.subscriptions ):
+                sleep_time = min( subscription.freq, sleep_time )
+                now = time.time()
+                if subscription.last_poll + subscription.freq < now:
+                    M5Clients[M5ClientId].subscriptions[SubscriptionId].last_poll = now
+                    if HasPort( subscription.uart.tty ) == True:
+                        # get mutex to avoid collision with the main thread
+                        M5Clients[M5ClientId].subscriptions[SubscriptionId].uart.mutex.acquire()
+                        if Poll( M5ClientId, SubscriptionId ) != True:
+                            ConsolePrintMessage("UART Polling failed")
+                            #WSEmit( M5Client.id, "UART DOWN" )
+                        M5Clients[M5ClientId].subscriptions[SubscriptionId].uart.mutex.release()
+
+                        if subscription.freq == 0: # one time subscription self-deletes after use
+                            M5Clients[M5ClientId].subscriptions.remove( subscription )
+                    else:
+                        if demo_mode == 1:
+                            cmd = str(subscription.cmd)
+                            resp = demo_response( cmd[4:6], cmd[6:8], cmd[8:14] )
+                            if resp != False:
+                                WSEmit( M5Client.id, resp )
+                            else:
+                                print("Bad command ",  cmd[6:8], cmd[8:14] )
+                        else:
+                            ConsolePrintError( subscription.uart.tty + " is not available" )
+                            WSEmit( M5Client.id, "UART DOWN" )
+
+        time.sleep( sleep_time ) # avoid loopbacks
+
 class S(BaseHTTPRequestHandler):
     def _set_response(self):
         self.send_response(200)
@@ -63,7 +97,7 @@ class S(BaseHTTPRequestHandler):
         self.send_header('Content-type', 'text/html')
         self.end_headers()
 
-    def do_GET(self):
+    def DoGet(self):
         if server_verbose > 1:        
             logging.info("GET request,\nPath: %s\nHeaders:\n%s\n", str(self.path), str(self.headers))
 
@@ -124,7 +158,7 @@ class S(BaseHTTPRequestHandler):
         except:
             self._set_error()
 
-    def log_message(self, format, *args):
+    def LogMessage(self, format, *args):
         return
 
 def run(server_class=HTTPServer, handler_class=S, port=1234):
@@ -142,10 +176,15 @@ def run(server_class=HTTPServer, handler_class=S, port=1234):
 
 if __name__ == '__main__':
 
-    # spawn a new thread to scan for serial devices with an active connection
+    # Spawn a new thread to scan for serial devices with an active connection
     port_controller = threading.Thread(target=PortsEnumerator, name="PortsScan")
     port_controller.setDaemon(True)
     port_controller.start()
+
+    # Spawn a new thread and attach the UART Poller
+    uart_poller = threading.Thread(target=UARTPoller, name='Daemon')
+    uart_poller.setDaemon(True)
+    uart_poller.start()
 
     from sys import argv
 
