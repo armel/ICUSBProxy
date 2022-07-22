@@ -10,6 +10,7 @@ import logging
 import cgi
 import serial
 import threading
+from threading import Thread, Lock
 
 name = "ICUSBProxy"
 version = "0.0.5"
