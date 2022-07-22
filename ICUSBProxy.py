@@ -25,17 +25,6 @@ ic_smeter = {
     "TX":           "fe,fe,00,e0,1c,00,fd"
 }
 
-for element in ic_smeter:
-    command = ic_smeter[element]
-
-    command = command.replace("00", "ff")
-
-
-    print(ic_smeter[element])
-    print(command)
-
-exit();
-
 class S(BaseHTTPRequestHandler):
     def _set_response(self):
         self.send_response(200)
@@ -60,15 +49,16 @@ class S(BaseHTTPRequestHandler):
         if(len(civ) == 2):
             civ = civ[1]
 
-            #civ = 'fe,fe,a4,e0,00,56,34,12,07,00,fd,115200,/dev/ttyUSB2'  # Debug trace
-            #civ = 'fe,fe,a4,e0,03,fd,115200,/dev/ttyUSB2'                 # Debug trace
-
             civ = civ.split(',')
 
             if(len(civ) > 2):
+
+                #civ = 'fe,fe,a4,e0,00,56,34,12,07,00,fd,115200,/dev/ttyUSB2'  # Debug trace
+                #civ = 'fe,fe,a4,e0,03,fd,115200,/dev/ttyUSB2'                 # Debug trace
+
                 client_serial = civ.pop()
                 client_baudrate = civ.pop()
-                client_adresse = civ[2]
+                client_address = civ[2]
 
                 try:
                     usb = serial.Serial(client_serial, client_baudrate, timeout=client_timeout)
@@ -86,7 +76,7 @@ class S(BaseHTTPRequestHandler):
                         response += '{:02x}'.format(value)
 
                     # Check if bad response    
-                    if(response == "fefee0" + client_adresse + "fafd"):
+                    if(response == "fefee0" + client_address + "fafd"):
                         response = ''
 
                     if server_verbose > 0:
@@ -98,8 +88,13 @@ class S(BaseHTTPRequestHandler):
                         print('Serial device ' + client_serial + ' is down...')
                     self._set_error()
             else:
+
+                #civ = 'a4,115200,/dev/ttyUSB2'     # Debug trace
+                #civ = 'a4,115200,/dev/ttyUSB2'     # Debug trace
+
                 client_serial = civ.pop()
                 client_baudrate = civ.pop()
+                client_address = civ.pop()
 
                 try:
                     usb = serial.Serial(client_serial, client_baudrate, timeout=client_timeout)
@@ -108,7 +103,7 @@ class S(BaseHTTPRequestHandler):
                     for element in ic_smeter:
                         command = ic_smeter[element]
 
-                        command = command.replace("00", client_adresse)
+                        command = command.replace("00", client_address)
 
 
                         print(ic_smeter(element))
@@ -123,7 +118,7 @@ class S(BaseHTTPRequestHandler):
                             response += '{:02x}'.format(value)
 
                         # Check if bad response    
-                        if(response == "fefee0" + client_adresse + "fafd"):
+                        if(response == "fefee0" + client_address + "fafd"):
                             response = ''
 
                         if server_verbose > 0:
