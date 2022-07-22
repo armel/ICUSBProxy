@@ -60,12 +60,11 @@ class S(BaseHTTPRequestHandler):
                 client_baudrate = civ.pop()
                 client_address = civ[2]
 
+                command = []
+
                 try:
                     usb = serial.Serial(client_serial, client_baudrate, timeout=client_timeout)
                     
-                    # Send command
-                    command = []
-
                     for value in civ:
                         command.append(int(value, 16))
 
