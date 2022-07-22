@@ -96,6 +96,7 @@ class S(BaseHTTPRequestHandler):
                 client_address = civ.pop()
 
                 print(client_serial, client_baudrate, client_address)
+                print("oco")
                 
                 try:
                     usb = serial.Serial(client_serial, client_baudrate, timeout=client_timeout)
