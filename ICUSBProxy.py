@@ -28,7 +28,7 @@ ic_smeter = {
 for element in ic_smeter:
     command = ic_smeter[element]
 
-    command = command.replace("00", client_adresse)
+    command = command.replace("00", "ff")
 
 
     print(ic_smeter(element))
