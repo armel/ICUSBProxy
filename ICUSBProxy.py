@@ -112,7 +112,7 @@ class S(BaseHTTPRequestHandler):
 
                         response += ";"
 
-
+                    print(response)
                     usb.close();
                 except:
                     if server_verbose > 0:
