@@ -16,13 +16,13 @@ client_timeout = 0.01
 server_verbose = 0
 
 ic_smeter = {
-    "S":            "fe,fe,00,e0,15,02,fd",
-    "SWR":          "fe,fe,00,e0,15,12,fd",
-    "PWD":          "fe,fe,00,e0,15,11,fd",
-    "DataMode":     "fe,fe,00,e0,1a,06,fd",
-    "Frequency":    "fe,fe,00,e0,03,fd",
-    "Mode":         "fe,fe,00,e0,04,fd",
-    "TX":           "fe,fe,00,e0,1c,00,fd"
+    "S":            "fe,fe,_,e0,15,02,fd",
+    "SWR":          "fe,fe,_,e0,15,12,fd",
+    "PWD":          "fe,fe,_,e0,15,11,fd",
+    "DataMode":     "fe,fe,_,e0,1a,06,fd",
+    "Frequency":    "fe,fe,_,e0,03,fd",
+    "Mode":         "fe,fe,_,e0,04,fd",
+    "TX":           "fe,fe,_,e0,1c,00,fd"
 }
 
 class S(BaseHTTPRequestHandler):
@@ -100,7 +100,7 @@ class S(BaseHTTPRequestHandler):
                     # Send command
                     for element in ic_smeter:
                         civ = ic_smeter[element]
-                        civ = civ.replace("00", client_address)
+                        civ = civ.replace('_', client_address)
                         civ = civ.split(',')
 
                         command = []
