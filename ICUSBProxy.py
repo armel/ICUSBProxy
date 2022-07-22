@@ -101,6 +101,8 @@ class S(BaseHTTPRequestHandler):
 
                         print(command)
 
+                        exit();
+
                         usb.write(serial.to_bytes(command))
 
                         data = usb.read(size=16) # Set size to something high
