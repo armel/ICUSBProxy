@@ -17,12 +17,12 @@ server_verbose = 0
 
 ic_smeter = {
     "S":            "fe,fe,00,e0,15,02,fd",
-    "SWR":          "fe,fe,00,e0,15,12,fd",
-    "PWD":          "fe,fe,00,e0,15,11,fd",
-    "DataMode":     "fe,fe,00,e0,1a,06,fd",
-    "Frequency":    "fe,fe,00,e0,03,fd",
-    "Mode":         "fe,fe,00,e0,04,fd",
-    "TX":           "fe,fe,00,e0,1c,00,fd"
+    #"SWR":          "fe,fe,00,e0,15,12,fd",
+    #"PWD":          "fe,fe,00,e0,15,11,fd",
+    #"DataMode":     "fe,fe,00,e0,1a,06,fd",
+    #"Frequency":    "fe,fe,00,e0,03,fd",
+    #"Mode":         "fe,fe,00,e0,04,fd",
+    #"TX":           "fe,fe,00,e0,1c,00,fd"
 }
 
 class S(BaseHTTPRequestHandler):
