@@ -36,7 +36,7 @@ from http.server import BaseHTTPRequestHandler, HTTPServer
 name           = "ICUSBProxy"
 version        = "0.1.0"
 client_timeout = 0.01
-server_verbose = 2
+server_verbose = 0
 demo_mode      = 0 # use this when no IC is actually connected, will send dummy data
 
 UARTS      = [] # UART's are shared between HTTP Server and WebSockets/Serial thread, but also across M5 Devices
