@@ -103,14 +103,11 @@ class S(BaseHTTPRequestHandler):
 
                     # Send command
                     for element in ic_smeter:
-                        print("ffff")
                         civ = ic_smeter[element]
-                        print(civ)
                         civ = civ.replace("00", client_address)
-                        print(civ)
                         civ = civ.split(',')
-                        print(civ)
-                        
+
+                        print(command)
                         for value in civ:
                             command.append(int(value, 16))
                         print(civ)
