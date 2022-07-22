@@ -107,8 +107,6 @@ class S(BaseHTTPRequestHandler):
                         for value in civ:
                             command.append(int(value, 16))
 
-                        print("iceeei")
-
                         logging.info(command)
 
                         usb.write(serial.to_bytes(command))
@@ -124,6 +122,7 @@ class S(BaseHTTPRequestHandler):
                         if server_verbose > 0:
                             print('Serial device ' + client_serial + ' is up...')
 
+                    print("la")
                     usb.close();
                 except:
                     if server_verbose > 0:
