@@ -113,8 +113,10 @@ class S(BaseHTTPRequestHandler):
                         
                         for value in civ:
                             command.append(int(value, 16))
+                        print(civ)
 
                         print(command)
+                        print(civ)
 
                         usb.write(serial.to_bytes(command))
 
