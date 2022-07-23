@@ -60,7 +60,7 @@ class S(BaseHTTPRequestHandler):
                 client_serial = civ.pop()
                 client_baudrate = civ.pop()
                 client_address = civ[2]
-                foo++
+                foo+=1
 
                 try:
                     usb = serial.Serial(client_serial, client_baudrate, timeout=client_timeout)
