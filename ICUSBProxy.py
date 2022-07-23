@@ -60,6 +60,7 @@ class S(BaseHTTPRequestHandler):
                 client_serial = civ.pop()
                 client_baudrate = civ.pop()
                 client_address = civ[2]
+                print(client_timeout)
                 foo+=1
 
                 try:
