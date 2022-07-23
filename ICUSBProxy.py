@@ -14,7 +14,7 @@ name = "ICUSBProxy"
 version = "0.0.5"
 client_timeout = 0.01
 server_verbose = 0
-request = 0
+request_count = 0
 
 ic_smeter = {
     "S":            "fe,fe,_,e0,15,02,fd",
@@ -60,9 +60,9 @@ class S(BaseHTTPRequestHandler):
                 client_serial = civ.pop()
                 client_baudrate = civ.pop()
                 client_address = civ[2]
-                request += 1
+                request_count += 1
 
-                print(request)
+                print(request_count)
 
                 try:
                     usb = serial.Serial(client_serial, client_baudrate, timeout=client_timeout)
