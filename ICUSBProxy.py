@@ -114,7 +114,8 @@ class S(BaseHTTPRequestHandler):
                         for value in data:
                             tmp += '{:02x}'.format(value)
                         
-                        response += tmp[8:-2]
+                        #response += tmp[8:-2]
+                        response += tmp
 
                         # Check if bad response    
                         if(response == "fefee0" + client_address + "fafd" or response == ''):
