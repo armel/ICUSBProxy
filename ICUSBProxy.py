@@ -14,7 +14,6 @@ name = "ICUSBProxy"
 version = "0.0.5"
 client_timeout = 0.01
 server_verbose = 0
-request_count = 0
 
 ic_smeter = {
     "S":            "fe,fe,_,e0,15,02,fd",
@@ -27,6 +26,9 @@ ic_smeter = {
 }
 
 class S(BaseHTTPRequestHandler):
+
+    request_count = 0
+
     def _set_response(self):
         self.send_response(200)
         self.send_header('Content-type', 'text/html')
