@@ -44,7 +44,7 @@ class S(BaseHTTPRequestHandler):
         # Init
         civ = str(self.path).split('=')
 
-        global foo
+        global request_count
         response = ''
         request = civ[0]
 
@@ -61,9 +61,9 @@ class S(BaseHTTPRequestHandler):
                 client_serial = civ.pop()
                 client_baudrate = civ.pop()
                 client_address = civ[2]
-                foo += 1
+                request_count += 1
 
-                print(foo)
+                print(request_count)
 
                 try:
                     usb = serial.Serial(client_serial, client_baudrate, timeout=client_timeout)
