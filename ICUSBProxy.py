@@ -86,7 +86,7 @@ class S(BaseHTTPRequestHandler):
                     if server_verbose > 0:
                         print('Serial device ' + client_serial + ' is up...')
 
-                    usb.close();
+                    #usb.close();
                 except:
                     if server_verbose > 0:
                         print('Serial device ' + client_serial + ' is down...')
