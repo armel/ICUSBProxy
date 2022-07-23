@@ -16,8 +16,6 @@ client_timeout = 0.01
 server_verbose = 0
 request_count = 0
 
-usb = serial.Serial("/dev/ttyUSB0", 115200, timeout=client_timeout)
-
 ic_smeter = {
     "S":            "fe,fe,_,e0,15,02,fd",
     "SWR":          "fe,fe,_,e0,15,12,fd",
@@ -60,7 +58,6 @@ class S(BaseHTTPRequestHandler):
                 #civ = 'fe,fe,a4,e0,00,56,34,12,07,00,fd,115200,/dev/ttyUSB2'  # Debug trace
                 #civ = 'fe,fe,a4,e0,03,fd,115200,/dev/ttyUSB2'                 # Debug trace
 
-                global usb
                 client_serial = civ.pop()
                 client_baudrate = civ.pop()
                 client_address = civ[2]
@@ -69,7 +66,7 @@ class S(BaseHTTPRequestHandler):
                 print(request_count)
 
                 try:
-                    #usb = serial.Serial(client_serial, client_baudrate, timeout=client_timeout)
+                    usb = serial.Serial(client_serial, client_baudrate, timeout=client_timeout)
 
                     command = []                
                     for value in civ:
@@ -89,7 +86,7 @@ class S(BaseHTTPRequestHandler):
                     if server_verbose > 0:
                         print('Serial device ' + client_serial + ' is up...')
 
-                    #usb.close();
+                    usb.close();
                 except:
                     if server_verbose > 0:
                         print('Serial device ' + client_serial + ' is down...')
