@@ -16,7 +16,7 @@ client_timeout = 0.01
 server_verbose = 0
 request_count = 0
 
-usb = serial.Serial("/dev/USB0", 115200, timeout=client_timeout)
+usb = serial.Serial("/dev/ttyUSB0", 115200, timeout=client_timeout)
 
 ic_smeter = {
     "S":            "fe,fe,_,e0,15,02,fd",
