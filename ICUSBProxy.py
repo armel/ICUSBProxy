@@ -12,7 +12,7 @@ import serial
 
 name = "ICUSBProxy"
 version = "0.0.5"
-client_timeout = 0.005
+client_timeout = 0.01
 server_verbose = 0
 request_count = 0
 
@@ -74,7 +74,8 @@ class S(BaseHTTPRequestHandler):
 
                     usb.write(serial.to_bytes(command))
 
-                    data = usb.read(size=16) # Set size to something high
+                    data = usb.readline()
+                    #data = usb.read(size=16) # Set size to something high
                     for value in data:
                         response += '{:02x}'.format(value)
 
