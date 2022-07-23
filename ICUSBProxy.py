@@ -12,7 +12,7 @@ import serial
 
 name = "ICUSBProxy"
 version = "0.0.5"
-client_timeout = 0.01
+client_timeout = 0.005
 server_verbose = 0
 request_count = 0
 
