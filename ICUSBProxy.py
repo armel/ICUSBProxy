@@ -68,12 +68,12 @@ class S(BaseHTTPRequestHandler):
                     response = ''
 
                 if server_verbose > 0:
-                    print('Serial device ' + client_serial + ' is up...')
+                    print(timestamp + ' - Serial device ' + client_serial + ' is up...')
 
                 usb.close();
             except:
                 if server_verbose > 0:
-                    print('Serial device ' + client_serial + ' is down...')
+                    print(timestamp + ' - Serial device ' + client_serial + ' is down...')
                 self._set_error()
         else:
             if server_verbose > 0:
