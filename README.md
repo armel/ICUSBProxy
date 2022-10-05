@@ -5,6 +5,8 @@
 ![version](https://img.shields.io/github/v/release/armel/ICUSBProxy)
 ![activity](https://img.shields.io/github/commit-activity/y/armel/ICUSBProxy)
 
+**Many thanks to them and all my [donors](#donations)🙏🏻** 
+
 The Icom IC-7300 or IC-9700 transceivers do not have Bluetooth or WiFi support.
 
 This project allows to set up an HTTP _proxy_ allowing to talk wirelessly, from an M5Stack (or other equipment), with an Icom transceiver like IC-7300 or IC-9700 and sending CI-V commands.
@@ -46,7 +48,12 @@ You can also download a [zip archive](https://github.com/armel/ICUSBProxy/releas
 
 # Usage
 
-Plug your Transceiver via the USB cable (USB type A to USB type B) to your PC. It's time to start the Python3 script :
+Plug your Transceiver via the USB cable to your PC. Ok, now it's time to start the Python3 script.
+
+
+## Command line
+
+To start the Python3 script, here the basic command :
 
 `./ICUSBProxy.py`
 
@@ -54,9 +61,35 @@ By default, the HTTP port is 1234, but you can change it. For example, if you wa
 
 `./ICUSBProxy.py 2345`
 
-And if you want to run this process even after logging out from the shell/terminal, here is the command (under Linux) :
+For Linux users, if you want to run this process even after logging out, here is the command :
 
 `nohup ./ICUSBProxy.py 2345 &`
+
+## Shell script (for Linux users)
+
+If you prefer, I add a shell script too, with `stop`, `start` and `restart` action.
+
+`./ICUSBProxy.sh start`
+
+`./ICUSBProxy.sh stop`
+
+`./ICUSBProxy.sh restart`
+
+Edit line 4 to change default port (1234) if necessary.
+
+
+# Improve (for Linux users)
+
+The code of this proxy could probably be improved. But it has the advantage of being simple and light.
+
+In use, I noticed some stability problems over time, probably due to a saturation of the streams exchanged by USB. In this case, you just have to restart the Proxy and everything goes back to normal.
+
+Moreover, I get very good results, by restarting the Proxy automatically every hour, via the Crontab. I add this entry to my Crontab :
+
+`0 * * * * /home/pi/ICUSBProxy/ICUSBProxy.sh restart` 
+
+Change it to your needs. It depends on the path where you install ICUSCProxy...
+
 
 # Credits
  
@@ -66,7 +99,7 @@ Icom and the Icom logo are registered trademarks of Icom Incorporated (Japan) in
 
 # Donations
 
-Special thanks to Rolf Schroeder DL8BAG, Brian Garber WB8AM, Matt B-Wilkinson M6VWM, Robert Agnew KD0TVP, Meinhard Frank Günther DL0CN, Johan Hansson SM0TSC, Tadeusz Pater VA7CPM, Frederic Ulmer F4ESO, Joshua Murray M0JMO, Mark Hammond N8MH, Angel Mateu Muzzio EA4GIG, Hiroshi Sasaki JL7KGW, Robert John Williams VK3IE, Mark Bumstead M0IAX, Félix Symann F1VEO, Patrick Ruhl DG2YRP, Michael Beck DH5DAX, Philippe Nicolas F4IQP, Timothy Nustad KD9KHZ, Martin Blanz DL9SAD, Edmund Thompson AE4TQ, Gregory Kiyoi KN6RUQ, Patrick Samson F6GWE and George Kokolakis SV3QUP for their donations. That’s so kind of them. Thanks so much 🙏🏻
+Special thanks to Rolf Schroeder DL8BAG, Brian Garber WB8AM, Matt B-Wilkinson M6VWM, Robert Agnew KD0TVP, Meinhard Frank Günther DL0CN, Johan Hansson SM0TSC, Tadeusz Pater VA7CPM, Frederic Ulmer F4ESO, Joshua Murray M0JMO, Mark Hammond N8MH, Angel Mateu Muzzio EA4GIG, Hiroshi Sasaki JL7KGW, Robert John Williams VK3IE, Mark Bumstead M0IAX, Félix Symann F1VEO, Patrick Ruhl DG2YRP, Michael Beck DH5DAX, Philippe Nicolas F4IQP, Timothy Nustad KD9KHZ, Martin Blanz DL9SAD, Edmund Thompson AE4TQ, Gregory Kiyoi KN6RUQ, Patrick Samson F6GWE, George Kokolakis SV3QUP and Ambrose "Bo" Barry W4GHV for their donations. That’s so kind of them. Thanks so much 🙏🏻
 
 If you find this project fun and useful then [offer me a beer](https://www.paypal.me/F4HWN) :) 
 
