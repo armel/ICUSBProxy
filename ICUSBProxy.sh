@@ -1,5 +1,10 @@
 #!/bin/sh
 
+# Change port and verbosity if necessary
+PORT=1234
+VERBOSE=0
+
+# Don't change anything from there if you don't know what you are doing...
 PATH_SCRIPT='ICUSBProxy.py'
 PATH_LOG='/tmp'
 
@@ -19,7 +24,7 @@ case "$1" in
     start)
         echo "Starting ICUSBProxy"
         if [ -z "$PID" ]; then
-            nohup python3 ${BASEDIR}/${PATH_SCRIPT} > $PATH_LOG/ICUSBProxy.log 2>&1 &
+            nohup python3 ${BASEDIR}/${PATH_SCRIPT} ${PORT} ${VERBOSE} > $PATH_LOG/ICUSBProxy.log 2>&1 &
         fi
         ;;
     restart)
@@ -27,7 +32,7 @@ case "$1" in
         if [ ! -z "$PID" ]; then
             kill -9 "${PID}"
         fi
-        nohup python3 ${BASEDIR}/${PATH_SCRIPT} > $PATH_LOG/ICUSBProxy.log 2>&1 &
+        nohup python3 ${BASEDIR}/${PATH_SCRIPT} ${PORT} ${VERBOSE} > $PATH_LOG/ICUSBProxy.log 2>&1 &
         ;;
     stop) 
         echo "Stopping ICUSBProxy"

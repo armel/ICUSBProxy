@@ -48,7 +48,12 @@ You can also download a [zip archive](https://github.com/armel/ICUSBProxy/releas
 
 # Usage
 
-Plug your Transceiver via the USB cable (USB type A to USB type B) to your PC. It's time to start the Python3 script :
+Plug your Transceiver via the USB cable to your PC. Ok, now it's time to start the Python3 script.
+
+
+## Command line
+
+To start the Python3 script, here the commande :
 
 `./ICUSBProxy.py`
 
@@ -59,6 +64,29 @@ By default, the HTTP port is 1234, but you can change it. For example, if you wa
 And if you want to run this process even after logging out from the shell/terminal, here is the command (under Linux) :
 
 `nohup ./ICUSBProxy.py 2345 &`
+
+## Shell script
+
+If you prefer, I add a shell script too, with `stop`, `start` and `restart` action.
+
+`./ICUSBProxy.sh start`
+
+`./ICUSBProxy.sh stop`
+
+`./ICUSBProxy.sh restart`
+
+Edit line 4 to change default port (1234) if necessary.
+
+
+# Improve
+
+The code of this proxy could probably be improved. But it has the advantage of being simple and light.
+
+In use, I noticed some stability problems over time, probably due to a saturation of the streams exchanged by USB. In this case, you just have to restart the Proxy and everything goes back to normal.
+
+Moreover, I get very good results, by restarting the Proxy automatically every hour, via the crontab. I add this entry to my crontab :
+
+`0 * * * * /home/pi/ICUSBProxy/ICUSBProxy.sh restart` 
 
 # Credits
  
