@@ -5,6 +5,8 @@
 ![version](https://img.shields.io/github/v/release/armel/ICUSBProxy)
 ![activity](https://img.shields.io/github/commit-activity/y/armel/ICUSBProxy)
 
+**Many thanks to them and all my [donors](#donations)🙏🏻** 
+
 The Icom IC-7300 or IC-9700 transceivers do not have Bluetooth or WiFi support.
 
 This project allows to set up an HTTP _proxy_ allowing to talk wirelessly, from an M5Stack (or other equipment), with an Icom transceiver like IC-7300 or IC-9700 and sending CI-V commands.
@@ -66,7 +68,7 @@ Icom and the Icom logo are registered trademarks of Icom Incorporated (Japan) in
 
 # Donations
 
-Special thanks to Rolf Schroeder DL8BAG, Brian Garber WB8AM, Matt B-Wilkinson M6VWM, Robert Agnew KD0TVP, Meinhard Frank Günther DL0CN, Johan Hansson SM0TSC, Tadeusz Pater VA7CPM, Frederic Ulmer F4ESO, Joshua Murray M0JMO, Mark Hammond N8MH, Angel Mateu Muzzio EA4GIG, Hiroshi Sasaki JL7KGW, Robert John Williams VK3IE, Mark Bumstead M0IAX, Félix Symann F1VEO, Patrick Ruhl DG2YRP, Michael Beck DH5DAX, Philippe Nicolas F4IQP, Timothy Nustad KD9KHZ, Martin Blanz DL9SAD, Edmund Thompson AE4TQ, Gregory Kiyoi KN6RUQ, Patrick Samson F6GWE and George Kokolakis SV3QUP for their donations. That’s so kind of them. Thanks so much 🙏🏻
+Special thanks to Rolf Schroeder DL8BAG, Brian Garber WB8AM, Matt B-Wilkinson M6VWM, Robert Agnew KD0TVP, Meinhard Frank Günther DL0CN, Johan Hansson SM0TSC, Tadeusz Pater VA7CPM, Frederic Ulmer F4ESO, Joshua Murray M0JMO, Mark Hammond N8MH, Angel Mateu Muzzio EA4GIG, Hiroshi Sasaki JL7KGW, Robert John Williams VK3IE, Mark Bumstead M0IAX, Félix Symann F1VEO, Patrick Ruhl DG2YRP, Michael Beck DH5DAX, Philippe Nicolas F4IQP, Timothy Nustad KD9KHZ, Martin Blanz DL9SAD, Edmund Thompson AE4TQ, Gregory Kiyoi KN6RUQ, Patrick Samson F6GWE, George Kokolakis SV3QUP and Ambrose "Bo" Barry W4GHV for their donations. That’s so kind of them. Thanks so much 🙏🏻
 
 If you find this project fun and useful then [offer me a beer](https://www.paypal.me/F4HWN) :) 
 
