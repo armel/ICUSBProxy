@@ -53,7 +53,7 @@ Plug your Transceiver via the USB cable to your PC. Ok, now it's time to start t
 
 ## Command line
 
-To start the Python3 script, here the commande :
+To start the Python3 script, here the basic command :
 
 `./ICUSBProxy.py`
 
@@ -61,11 +61,11 @@ By default, the HTTP port is 1234, but you can change it. For example, if you wa
 
 `./ICUSBProxy.py 2345`
 
-And if you want to run this process even after logging out from the shell/terminal, here is the command (under Linux) :
+For Linux users, if you want to run this process even after logging out, here is the command :
 
 `nohup ./ICUSBProxy.py 2345 &`
 
-## Shell script
+## Shell script (for Linux users)
 
 If you prefer, I add a shell script too, with `stop`, `start` and `restart` action.
 
@@ -78,15 +78,18 @@ If you prefer, I add a shell script too, with `stop`, `start` and `restart` acti
 Edit line 4 to change default port (1234) if necessary.
 
 
-# Improve
+# Improve (for Linux users)
 
 The code of this proxy could probably be improved. But it has the advantage of being simple and light.
 
 In use, I noticed some stability problems over time, probably due to a saturation of the streams exchanged by USB. In this case, you just have to restart the Proxy and everything goes back to normal.
 
-Moreover, I get very good results, by restarting the Proxy automatically every hour, via the crontab. I add this entry to my crontab :
+Moreover, I get very good results, by restarting the Proxy automatically every hour, via the Crontab. I add this entry to my Crontab :
 
 `0 * * * * /home/pi/ICUSBProxy/ICUSBProxy.sh restart` 
+
+Change it to your needs. It depends on the path where you install ICUSCProxy...
+
 
 # Credits
  
