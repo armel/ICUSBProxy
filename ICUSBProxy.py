@@ -7,12 +7,11 @@ Usage: ./ICUSBProxy.py [port] [error level]
 
 from http.server import BaseHTTPRequestHandler, HTTPServer
 import logging
-import cgi
 import serial
 import time
 
 name = "ICUSBProxy"
-version = "0.0.7"
+version = "0.0.8"
 client_timeout = 0.01
 server_verbose = 0
 
